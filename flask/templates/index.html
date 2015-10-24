@@ -26,7 +26,9 @@
 
     <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script type="text/javascript" src="static/js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="static/js/app.js"></script>
+    
 </head>
 <body>
 
@@ -51,19 +53,17 @@
 
                 <div class="container">
                     <div class="row">
-                        <div class="one-half column" style="margin-top: 25%">
-                            <div id="floating-panel">
-                                <button onclick="toggleHeatmap()">Toggle Heatmap</button>
-                                <button onclick="changeGradient()">Change gradient</button>
-                                <button onclick="changeRadius()">Change radius</button>
-                                <button onclick="changeOpacity()">Change opacity</button>
-                            </div>
-                            <div class="one-half column u-pull-right">
-                                <div id="map"></div>
-                            </div>
+                        <input type="text" name="query" placeholder="Type in what you want to search!">
+                        <select id = 'ideas'>
+                            <option>Basketball</option>
+                            <option>Oregon</option>
+                            <option>Kim Kardashian</option>
+                        </select>
+                        <button id="submit" type="button" class="btn btn-default" onclick="getPoints()">Submit</button>
                         </div>
                     </div>
                 </div>
+    <div id="map"></div>
     
                 <script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&signed_in=true&libraries=visualization&callback=initMap">
                 </script>
