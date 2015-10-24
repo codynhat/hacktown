@@ -1,6 +1,9 @@
 import twitter, json, StringIO
+from elasticsearch import Elasticsearch
 from textblob import TextBlob
-                      
+             
+es = Elasticsearch()
+
 def main():
     api = twitter.Api(consumer_key='xiRvwM5u5lgLW4GsfMq1BLxmw',
                   consumer_secret='A7IPWnxsfTfTccnuyF9TXPXEBwpC6WyEVwkNseJXxv4SVqhncd',
@@ -11,7 +14,10 @@ def main():
     for status in query:
         valueswecareabout.append((status.text, status.location, status.coordinates, status.geo, status.place))
     for tweet in valueswecareabout:
-        print getSentiment(tweet[0])
+        lat = tweet[2].split(',')[0]
+        lng = tweet[2].split(',')[1]
+        score = getSentiment(tweet[0])
+        es.index(index="index", body={"lat": lat, "lng": lng, "score": score})
 
 def getTweets(api, searchterm, geo):
     query = api.GetSearch(term = searchterm, count = 100, geocode = geo)
