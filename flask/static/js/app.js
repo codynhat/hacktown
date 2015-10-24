@@ -22,8 +22,9 @@ function initMap() {
         data: test(),
         map: map,
         radius: 100
-    })*/
+    });
 }
+
 
 function toggleHeatmap() {
   heatmap.setMap(heatmap.getMap() ? null : map);
