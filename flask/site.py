@@ -49,7 +49,10 @@ def page_not_found(error):
 #
 #################
 
+@app.route("/_tweet_calcs")
+def calc_tweets():
 
+    return jsonify(result)
 
 
 #############

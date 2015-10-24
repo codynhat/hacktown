@@ -1,16 +1,18 @@
 var map, heatmap;
 
 function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
+  "use strict";
+    map = new google.maps.Map(document.getElementById('map'), {
     zoom: 13,
     center: {lat: 37.775, lng: -122.434},
     mapTypeId: google.maps.MapTypeId.SATELLITE
   });
-}
-  heatmap1 = new google.maps.visualization.HeatmapLayer({
-    data: getPoints1(),
+
+  heatmap = new google.maps.visualization.HeatmapLayer({
+    data: getPoints(),
     map: map
   });
+
 
 function toggleHeatmap() {
   heatmap.setMap(heatmap.getMap() ? null : map);
@@ -34,7 +36,7 @@ function changeGradient() {
     'rgba(191, 0, 31, 1)',
     'rgba(0, 0, 191, 1)',
   ]
-  heatmap1.set('gradient', heatmap1.get('gradient') ? null : gradient);
+  heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
 }
 
 function changeRadius() {
@@ -46,6 +48,30 @@ function changeOpacity() {
 }
 
 // Heatmap data: 500 Points
+<<<<<<< HEAD
 function getPoints1() {
     return
 }
+=======
+function getPoints() {
+    $.ajax({
+        url: 'flask/getpoint.py', //TO DO
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            'query' : $('input[name=query]')
+        },
+        success: function(json) {
+            var array = [];
+            $.each(json, function (i, item) {
+                array.push(new google.maps.visualization.WeightLocation(google.maps.LatLng(json.lat, json.long), json.weight + 1.01));
+            });
+            return array;
+        },
+        error: function (xhr, desc, err) {
+            console.log(xhr);
+            console.log("Details: " + desc + "\nError: " + err);
+        }
+   });
+}
+>>>>>>> 41d3db1c48783c04598904c91e9688a0b3b21325
