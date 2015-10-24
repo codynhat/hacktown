@@ -34,7 +34,7 @@ app.logger.setLevel(logging.DEBUG)
 def index():
   app.logger.debug("Main page entry")
 
-  return flask.render_template('site.html')
+  return flask.render_template('index.html')
 
 
 @app.errorhandler(404)

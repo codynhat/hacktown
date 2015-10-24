@@ -31,12 +31,13 @@ function toggleHeatmap() {
 function changeGradient() {
   var gradient = [
     'rgba(0, 255, 255, 0)',
-    'rgba(0, 255, 255, 1)',
-    'rgba(0, 191, 255, 1)',
-    'rgba(0, 127, 255, 1)',
-    'rgba(0, 63, 255, 1)',
-    'rgba(0, 0, 255, 1)',
     'rgba(0, 0, 223, 1)',
+    'rgba(0, 0, 255, 1)',
+    'rgba(0, 63, 255, 1)',
+    'rgba(0, 127, 255, 1)',
+    'rgba(0, 191, 255, 1)',
+    'rgba(0, 255, 255, 1)',
+    'rgba(0, 255, 255, 0)', //Transparent
     'rgba(0, 0, 191, 1)',
     'rgba(0, 0, 159, 1)',
     'rgba(0, 0, 127, 1)',
@@ -280,6 +281,9 @@ function getPoints2(){
     new google.maps.LatLng(37.800224, -122.433520),
     new google.maps.LatLng(37.800155, -122.434101),
     new google.maps.LatLng(37.800160, -122.434430),
+    {location: new google.maps.LatLng(37.782842, -122.443688), weight: .1},
+    {location: new google.maps.LatLng(37.782919, -122.442815), weight: .1},
+    {location: new google.maps.LatLng(37.783508, -122.439525), weight: .6},
     new google.maps.LatLng(37.800378, -122.434527),
     new google.maps.LatLng(37.800738, -122.434598),
     new google.maps.LatLng(37.800938, -122.434650),
