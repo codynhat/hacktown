@@ -13,8 +13,11 @@ def main():
     for tweet in valueswecareabout:
         print getSentiment(tweet[0])
 
+def getTweets(api, searchterm, geo):
+    query = api.GetSearch(term = searchterm, count = 100, geocode = geo)
+    
+        
 def getSentiment(tweet):
-
 		value = TextBlob(tweet)
 		return value.sentiment.polarity
         
