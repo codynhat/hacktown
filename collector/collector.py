@@ -18,11 +18,24 @@ def main():
 def getTweets(api, searchterm, geo):
     query = api.GetSearch(term = searchterm, count = 100, geocode = geo)
     return query
-    
-        
+
+
 def getSentiment(tweet):
     value = TextBlob(tweet)
     return value.sentiment.polarity
+
+def getLatLng(location):
+    payload = {'location': location}
+    r = requests.get('http://www.mapquestapi.com/geocoding/v1/address?',data={
+        'key': '7N1MeC0H0uFcbyzovGkG8SPFu5SdPUjU',
+        'inFormat': 'json',
+        'outFormat':'json',
+        'maxResults': 1,
+    },params=payload);
+
+    re = r.json()
+    latLng = re['results'][0]['locations'][0]['latLng']
+    return latLng
 
 if __name__ == '__main__':
     main()
