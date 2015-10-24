@@ -51,7 +51,7 @@ function getPoints() {
   return [
     {location: new google.maps.LatLng(37.782842, -122.443688), weight: .1},
     {location: new google.maps.LatLng(37.782919, -122.442815), weight: .1},
-    {location: new google.maps.LatLng(37.783508, -122.439525), weight: 1},
+    {location: new google.maps.LatLng(37.783508, -122.439525), weight: .6},
     new google.maps.LatLng(37.800378, -122.434527),
     new google.maps.LatLng(37.800738, -122.434598),
     new google.maps.LatLng(37.800938, -122.434650),
