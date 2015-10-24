@@ -1,4 +1,5 @@
 import twitter, json, StringIO
+from textblob import TextBlob
                       
 def main():
     api = twitter.Api(consumer_key='xiRvwM5u5lgLW4GsfMq1BLxmw',
@@ -10,8 +11,12 @@ def main():
     for status in query:
         valueswecareabout.append((status.text, status.location, status.coordinates, status.geo, status.place))
     for tweet in valueswecareabout:
-        getSentiment(tweet[0])
-    
+        print getSentiment(tweet[0])
+
+def getSentiment(tweet):
+
+		value = TextBlob(tweet)
+		return value.sentiment.polarity
+        
 if __name__=='__main__':
     main()
-    
