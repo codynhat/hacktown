@@ -19,7 +19,6 @@ import logging
 app = flask.Flask(__name__)
 import CONFIG
 
-
 import uuid
 app.secret_key = str(uuid.uuid4())
 app.debug=CONFIG.DEBUG
