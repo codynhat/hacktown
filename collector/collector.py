@@ -7,7 +7,7 @@ def main():
                   access_token_key='1939224967-lZqH7LpKSs775MCNK2ynZlJ0meUIcDt9QiM5KAt',
                   access_token_secret='bgelSzudLaRrKaQcIHvXOXvNW7QaoNpEiaLmnGAnvYNmt')
     valueswecareabout = []
-    query = api.GetSearch(term="adele", count = 100,geocode = ("38.5000","98.0000","3000km"))
+    getTweets(api, "adele", ("38.5000","98.0000","3000km"))
     for status in query:
         valueswecareabout.append((status.text, status.location, status.coordinates, status.geo, status.place))
     for tweet in valueswecareabout:
@@ -15,6 +15,7 @@ def main():
 
 def getTweets(api, searchterm, geo):
     query = api.GetSearch(term = searchterm, count = 100, geocode = geo)
+    return query
     
         
 def getSentiment(tweet):

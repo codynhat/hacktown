@@ -3,5 +3,5 @@ oauthlib==1.0.3
 python-twitter==2.2
 requests==2.8.1
 requests-oauthlib==0.5.0
-textblob==0.10.0
 wheel==0.24.0
+textblob==0.10.0

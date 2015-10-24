@@ -12,6 +12,18 @@ function initMap() {
     data: getPoints(),
     map: map
   });
+    
+  happy_heatmap = new google.maps.visualization.HeatmapLayer({
+    data: getPoints2(),
+    map: map
+  });
+    
+    heatmap3 = new google.maps.visualization.HeatmapLayer({
+        data: test(),
+        map: map,
+        radius: 100
+    });
+}
 
 
 function toggleHeatmap() {
@@ -48,14 +60,10 @@ function changeOpacity() {
 }
 
 // Heatmap data: 500 Points
-<<<<<<< HEAD
-function getPoints1() {
-    return
-}
-=======
 function getPoints() {
+    $SCRIPT_ROOT = {{request.script_root | tojson | safe}};
     $.ajax({
-        url: 'flask/getpoint.py', //TO DO
+        url: $SCRIPT_ROOT + '/_tweet_calcs', //TO DO
         type: 'GET',
         dataType: 'json',
         data: {
@@ -74,4 +82,3 @@ function getPoints() {
         }
    });
 }
->>>>>>> 41d3db1c48783c04598904c91e9688a0b3b21325
