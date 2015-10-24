@@ -25,10 +25,49 @@
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
+<script type="text/javascript" src = "js/app.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    #map {
+      height: 100%;
+    }
+  #floating-panel {
+  position: absolute;
+  top: 10px;
+  left: 25%;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+  }
 
+    #floating-panel {
+      background-color: #fff;
+      border: 1px solid #999;
+      left: 25%;
+      padding: 5px;
+      position: absolute;
+      top: 10px;
+      z-index: 5;
+    }
+  </style>
 </head>
 <body>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+        <ul class=flashes>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
 <div class="banner">
     <div class="row">
 <div class="u-full-width column">
@@ -40,7 +79,7 @@
   <div class = "container">
       <div class="row">
         <div class="u-max-full-width column" style="margin-top: 10%">
-
+<h1>Title of Page</h1>
 
         </div>
   <div class="container">
@@ -52,7 +91,30 @@
     </div>
   </div>
 
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div id="floating-panel">
+    <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+    <button onclick="changeGradient()">Change gradient</button>
+    <button onclick="changeRadius()">Change radius</button>
+    <button onclick="changeOpacity()">Change opacity</button>
+  </div>
+  <div id="map"></div>
+  <script type="text/javascript">
+              $SCRIPT_ROOT = {{request.script_root | tojson | safe}};
+
+              $(document).ready(function() {
+                    $('#map').change(function() {
+                        var data_in = null
+
+
+                        $.getJSON($SCRIPT_ROOT + '/_tweet_calcs',
+                    function(data){
+                        var result = data.results
+                    });
+
+                });
+ </script>
+  <script async defer
+      src="https://maps.googleapis.com/maps/api/js?sensor=false&signed_in=true&libraries=visualization&callback=initMap">
+  </script>
 </body>
 </html>
