@@ -13,7 +13,7 @@ function initMap() {
     map: map
   });
     
-  /*heatmap2 = new google.maps.visualization.HeatmapLayer({
+  happy_heatmap = new google.maps.visualization.HeatmapLayer({
     data: getPoints2(),
     map: map
   });
@@ -60,8 +60,9 @@ function changeOpacity() {
 
 // Heatmap data: 500 Points
 function getPoints() {
+    $SCRIPT_ROOT = {{request.script_root | tojson | safe}};
     $.ajax({
-        url: 'flask/getpoint.py', //TO DO
+        url: $SCRIPT_ROOT + '/_tweet_calcs', //TO DO
         type: 'GET',
         dataType: 'json',
         data: {
