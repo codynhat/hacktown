@@ -78,12 +78,7 @@
                 <div class ="col-md-4 col-md-push-8">
                     <div id="tweeter">
                         <ul>
-                            <li><div>
-                                <h1>YAY</h1>
-                                <p>Maybe</p>
-                                </div></li>
-                            <li>BOBY</li>
-                            <li>DOG</li>
+                            
                         </ul>
                     </div>
             </div>
@@ -167,6 +162,7 @@
                                 };
                                 happy_array.push(weightedLoc);
                             }
+                            $('#tweeter ul').append('<li><h2>' + item.name + '</h2><p>' + item.text + '<p></li>');
                         });
                         if(typeof sad_heatmap !== 'undefined' ){
                             sad_heatmap.setMap(null);
@@ -200,9 +196,30 @@
                 })
             });
             
-            $("button#happy").click(function() {});
-            $("button#sad").click(function() {});
-            $("button#both").click(function() {});
+            $("button#happy").click(function() {
+                if(typeof sad_heatmap !== 'undefined' ){
+                    sad_heatmap.setMap(null);
+                }
+                if(typeof happy_heatmap !== 'undefined' ){
+                    happy_heatmap.setMap(map);
+                }
+            });
+            $("button#sadness").click(function() {
+                if(typeof sad_heatmap !== 'undefined' ){
+                    sad_heatmap.setMap(map);
+                }
+                if(typeof happy_heatmap !== 'undefined' ){
+                    happy_heatmap.setMap(null);
+                }
+            });
+            $("button#both").click(function() {
+                if(typeof sad_heatmap !== 'undefined' ){
+                    sad_heatmap.setMap(map);
+                }
+                if(typeof happy_heatmap !== 'undefined' ){
+                    happy_heatmap.setMap(map);
+                }
+            });
         }
 
 
