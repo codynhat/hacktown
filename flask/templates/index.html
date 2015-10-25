@@ -57,12 +57,18 @@
             <form class="form-inline">
             <input class="form-control" type="text" name="query" placeholder="Type in what you want to search!">
             <select class="form-control" id = 'ideas'>
-                <option>Basketball</option>
+                <option>Star Wars</option>
                 <option>Obama</option>
                 <option>Trump</option>
                 <option>Adele</option>
             </select>
-            <button id="submit" type="button" class="btn btn-default" onclick="getPoints()">Submit</button>
+            <button id="submit" type="button" class="btn btn-default">Submit</button>
+            
+            <div class='btn-group'>
+                <button id="happy" type="button" class="btn btn-default">Happiness</button>
+                <button id="sadness" type="button" class="btn btn-default">Sadness</button>
+                <button id="both" type="button" class="btn btn-default">Both</button>
+            </div>
     </form>
             </div>
         </div>
@@ -169,6 +175,15 @@
                             happy_heatmap.setMap(null);
                         }
 
+                        sad_heatmap = new google.maps.visualization.HeatmapLayer({
+                            data: sad_array,
+                            map: map,
+                            radius: 100,
+                            gradient: sad_gradient,
+                            opacity: .5
+                        });
+
+
                         happy_heatmap = new google.maps.visualization.HeatmapLayer({
                             data: happy_array,
                             map: map,
@@ -191,6 +206,10 @@
                     }
                 })
             });
+            
+            $("button#happy").click(function() {});
+            $("button#sad").click(function() {});
+            $("button#both").click(function() {});
         }
 
 
