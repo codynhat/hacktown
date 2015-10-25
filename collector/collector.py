@@ -59,9 +59,9 @@ def main():
 
 def getTweets(api, searchterm, last_id):
     if last_id:
-        query = api.GetSearch(term = searchterm, count = 100, max_id = last_id)
+        query = api.GetSearch(term = searchterm, count = 100, lang = "en", max_id = last_id)
     else:
-        query = api.GetSearch(term = searchterm, count = 100)
+        query = api.GetSearch(term = searchterm, count = 100, lang="en")
     return query
     
 def logTweets(query, valueswecareabout):
