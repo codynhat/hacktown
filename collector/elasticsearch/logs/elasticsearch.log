@@ -9963,3 +9963,7 @@ Caused by: java.io.FileNotFoundException: /Users/Cody/Documents/Projects/hacktow
 [2015-10-24 19:10:37,361][INFO ][http                     ] [Rattler] bound_address {inet[/0:0:0:0:0:0:0:0:9200]}, publish_address {inet[/10.111.245.155:9200]}
 [2015-10-24 19:10:37,362][INFO ][node                     ] [Rattler] started
 [2015-10-24 19:10:37,390][INFO ][gateway                  ] [Rattler] recovered [1] indices into cluster_state
+[2015-10-24 20:39:59,311][INFO ][node                     ] [Rattler] stopping ...
+[2015-10-24 20:39:59,380][INFO ][node                     ] [Rattler] stopped
+[2015-10-24 20:39:59,381][INFO ][node                     ] [Rattler] closing ...
+[2015-10-24 20:39:59,390][INFO ][node                     ] [Rattler] closed

@@ -63,6 +63,9 @@
                     </div>
                 </div>
     <div id="map"></div>
+    <div id="tweeter">
+    <a class="twitter-timeline" href="https://twitter.com/search?q=corgi" data-widget-id="658116944541843456"></a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </div>
 
     <script type="text/javascript">
         /*global google*/
@@ -72,7 +75,7 @@
         function initMap() {
             "use strict";
             map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 1,
+                zoom: 4,
                 center: {lat: 38.8833, lng: -102.9833},
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 disableDefaultUI: true,
@@ -88,6 +91,8 @@
             $("button#submit").click(function() {
                 
                 var $value = $('#ideas option:selected').text();
+                $("#tweeter a").attr("href", "https://twitter.com/search?q=" + $value);
+                twttr.widgets.load();
                 $.ajax({
                     url: $SCRIPT_ROOT + '/_tweet_calcs', //TO DO
                     type: 'GET',
@@ -100,14 +105,15 @@
                         var array = [];
                         $.each(json.result, function (i, item) {
                             var coordinates = new google.maps.LatLng(parseInt(item.lat), parseInt(item.lng));
-                            array.push(coordinates);
+                            var weightedLoc = {location: coordinates, weight: item.wgt + 1.01};
+                            array.push(weightedLoc);
                         }); 
                                                 
 
                         var heatmap1 = new google.maps.visualization.HeatmapLayer({
                             data: array,
                             map: map,
-                            radius: 20
+                            radius: 60
                         });
                     },
                     error: function (xhr, desc, err) {
