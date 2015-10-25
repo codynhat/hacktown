@@ -51,15 +51,6 @@
 
     <div class="container">
         <div class="row">
-            <div class="jumbotron">
-                <h1>What's the Hack is Going On in the United States</h1>
-                <p>APIs, APIs, and more APIs</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
             <form class="form-inline">
             <input class="form-control" type="text" name="query" placeholder="Type in what you want to search!">
             <select class="form-control" id = 'ideas'>
@@ -118,8 +109,8 @@
             });
             var happy_gradient = [
                 'rgba(255, 255, 255, 0)', //Transparent
-                'rgba(255, 255, 150, 0.6)',
-                'rgba(255, 255, 120, 0.8)',
+                'rgba(255, 255, 150, 1)',
+                'rgba(255, 255, 120, 1)',
                 'rgba(255, 255, 90, 1)',
                 'rgba(255, 255, 60, 1)',
                 'rgba(255, 255, 40, 1)',
@@ -129,8 +120,8 @@
 
             var sad_gradient = [
                 'rgba(255, 255, 255, 0)',
-                'rgba(255, 200, 200, 0.6)',
-                'rgba(255, 160, 100, 0.8)',
+                'rgba(255, 200, 200, 1)',
+                'rgba(255, 160, 100, 1)',
                 'rgba(255, 120, 60, 1)',
                 'rgba(255, 80, 40, 1)',
                 'rgba(255, 40, 20, 1)',
@@ -157,13 +148,13 @@
                             if (item.wgt < 0) {
                                 var weightedLoc = {
                                     location: coordinates,
-                                    weight: item.wgt * -1
+                                    weight: item.wgt * -100
                                 };
                                 sad_array.push(weightedLoc);
                             } else if (item.wgt > 0) {
                                 var weightedLoc = {
                                     location: coordinates,
-                                    weight: item.wgt
+                                    weight: item.wgt * 100
                                 };
                                 happy_array.push(weightedLoc);
                             }
@@ -197,18 +188,6 @@
                     }
                 })
             });
-
-            /*
-            happy_heatmap = new google.maps.visualization.HeatmapLayer({
-            data: getPoints2(),
-            map: map
-            });
-
-            heatmap3 = new google.maps.visualization.HeatmapLayer({
-                data: test(),
-                map: map,
-                radius: 100
-            }); */
         }
 
 
