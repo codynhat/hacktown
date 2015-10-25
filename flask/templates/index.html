@@ -110,7 +110,7 @@
         function initMap() {
             "use strict";
             map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 5,
+                zoom: 4,
                 center: {lat: 38.8833, lng: -95.9833},
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 disableDefaultUI: true,
@@ -124,11 +124,11 @@
             });
             var happy_gradient = [
                 'rgba(255, 255, 255, 0)', //Transparent
-                'rgba(255, 255, 180, 0.6)',
-                'rgba(255, 255, 100, 0.8)',
+                'rgba(255, 255, 150, 0.6)',
+                'rgba(255, 255, 120, 0.8)',
+                'rgba(255, 255, 90, 1)',
+                'rgba(255, 255, 60, 1)',
                 'rgba(255, 255, 40, 1)',
-                'rgba(255, 255, 20, 1)',
-                'rgba(255, 255, 10, 1)',
                 'rgba(255, 255, 0, 1)'
 
             ]
@@ -171,7 +171,7 @@
                         var sad_heatmap = new google.maps.visualization.HeatmapLayer({
                             data: sad_array,
                             map: map,
-                            radius: 100,
+                            radius: 60,
                             gradient: sad_gradient
                         });
 
@@ -179,7 +179,7 @@
                         var happy_heatmap = new google.maps.visualization.HeatmapLayer({
                             data: happy_array,
                             map: map,
-                            radius: 100,
+                            radius: 60,
                             gradient: happy_gradient
                         });
 
