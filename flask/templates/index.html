@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,19 +13,20 @@
     <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <link href="static/css/styles.css" rel="stylesheet">
-<script type="text/javascript" src="static/js/app.js"></script>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="static/js/app.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="static/js/bootstrap.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
-  <body>
+</head>
+
+<body>
 
     {% with messages = get_flashed_messages() %} {% if messages %}
     <ul class=flashes>
@@ -34,56 +36,64 @@
     </ul>
     {% endif %} {% endwith %}
 
-        <!-- Primary Page Layout
+    <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-           <div class ="container">
-            <div class="row">
-                <div class="12-md-col">
-                    <h1>What's the Hack is Going On in the United States</h1>
-                    <h4>Lane8</h4>
-                    <p>APIs, APIs, and more APIs</p>
-                </div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+            Lane8
+        </a>
+                <p class="navbar-text">lets get hacky</p>
             </div>
-</div>
+        </div>
+    </nav>
 
-                <div class="container">
-                    <div class="row">
-                        <form class="form-inline">
-                        <input class="form-control" type="text" name="query" placeholder="Type in what you want to search!">
-                        <select class="form-control" id = 'ideas'>
-                            <option>Basketball</option>
-                            <option>Oregon</option>
-                            <option>Trump</option>
-                            <option>Adele</option>
-                        </select>
-                        <button id="submit" type="button" class="btn btn-default" onclick="getPoints()">Submit</button>
-</form>
-                        </div>
-                    </div>
-
-<<<<<<< HEAD
-            <div class="container-fluid">
-                        <div class="row">
-
-                <div class="col-md-12">
-=======
+    <div class="container">
+        <div class="row">
+            <div class="jumbotron">
+                <h1>What's the Hack is Going On in the United States</h1>
+               <p>APIs, APIs, and more APIs</p>
+            <form class="form-inline">
+            <input class="form-control" type="text" name="query" placeholder="Type in what you want to search!">
+            <select class="form-control" id = 'ideas'>
+                <option>Star Wars</option>
+                <option>Obama</option>
+                <option>Trump</option>
+                <option>Adele</option>
+            </select>
+            <button id="submit" type="button" class="btn btn-default">Submit</button>
+            
+            <div class='btn-group'>
+                <button id="happy" type="button" class="btn btn-default">Happiness</button>
+                <button id="sadness" type="button" class="btn btn-default">Sadness</button>
+                <button id="both" type="button" class="btn btn-default">Both</button>
+            </div>
+    </form>
+            </div>
+        </div>
 <div class="container-fluid">
         <div class="row">
-
-<div class="col-md-12">
->>>>>>> b6d6597609f531f4f3d875e7eb331d0a1d34ff4c
-            <div class="col-md-8 col-md-push-4">
+            <div class="col-md-12">
+                <div class ="col-md-4 col-md-push-8">
+                    <div id="tweeter">
+                        <ul>
+                            <li><div>
+                                <h1>YAY</h1>
+                                <p>Maybe</p>
+                                </div></li>
+                            <li>BOBY</li>
+                            <li>DOG</li>
+                        </ul>
+                    </div>
+            </div>
+    <div class="col-md-8 col-md-pull-4">
         <div id='map'></div>
     </div>
-        <div class ="col-md-4 col-md-pull-8">
-            <div id="tweeter">
-            <a class="twitter-timeline" href="https://twitter.com/search?q=corgi" data-widget-id="658116944541843456"></a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            </div>
-        </div>
-        </div>
-    </div>
-</div>
 
+</div>
+</div>
+</div>
 
 
     <script type="text/javascript">
@@ -108,8 +118,8 @@
             });
             var happy_gradient = [
                 'rgba(255, 255, 255, 0)', //Transparent
-                'rgba(255, 255, 150, 0.6)',
-                'rgba(255, 255, 120, 0.8)',
+                'rgba(255, 255, 150, 1)',
+                'rgba(255, 255, 120, 1)',
                 'rgba(255, 255, 90, 1)',
                 'rgba(255, 255, 60, 1)',
                 'rgba(255, 255, 40, 1)',
@@ -119,8 +129,8 @@
 
             var sad_gradient = [
                 'rgba(255, 255, 255, 0)',
-                'rgba(255, 200, 200, 0.6)',
-                'rgba(255, 160, 100, 0.8)',
+                'rgba(255, 200, 200, 1)',
+                'rgba(255, 160, 100, 1)',
                 'rgba(255, 120, 60, 1)',
                 'rgba(255, 80, 40, 1)',
                 'rgba(255, 40, 20, 1)',
@@ -136,19 +146,25 @@
                     type: 'GET',
                     dataType: 'json',
                     data: {
-                        'query' : $value
+                        'query': $value
                     },
                     success: function(json) {
                         console.log(json);
                         var happy_array = [];
                         var sad_array = [];
-                        $.each(json.result, function (i, item) {
+                        $.each(json.result, function(i, item) {
                             var coordinates = new google.maps.LatLng(parseInt(item.lat), parseInt(item.lng));
-                            if (item.wgt < 0){
-                                var weightedLoc = {location: coordinates, weight: item.wgt*-1};
+                            if (item.wgt < 0) {
+                                var weightedLoc = {
+                                    location: coordinates,
+                                    weight: item.wgt * -100
+                                };
                                 sad_array.push(weightedLoc);
-                            }else if(item.wgt>0){
-                                var weightedLoc = {location: coordinates, weight: item.wgt};
+                            } else if (item.wgt > 0) {
+                                var weightedLoc = {
+                                    location: coordinates,
+                                    weight: item.wgt * 100
+                                };
                                 happy_array.push(weightedLoc);
                             }
                         });
@@ -158,80 +174,80 @@
                         if(typeof happy_heatmap !== 'undefined' ){
                             happy_heatmap.setMap(null);
                         }
-                        
+
                         sad_heatmap = new google.maps.visualization.HeatmapLayer({
                             data: sad_array,
                             map: map,
-                            radius: 60,
-                            gradient: sad_gradient
+                            radius: 100,
+                            gradient: sad_gradient,
+                            opacity: .5
                         });
 
 
                         happy_heatmap = new google.maps.visualization.HeatmapLayer({
                             data: happy_array,
                             map: map,
-                            radius: 60,
-                            gradient: happy_gradient
+                            radius: 70,
+                            gradient: happy_gradient,
+                            opacity: .8
+                        });
+                        sad_heatmap = new google.maps.visualization.HeatmapLayer({
+                            data: sad_array,
+                            map: map,
+                            radius: 70,
+                            gradient: sad_gradient,
+                            opacity: .5
                         });
 
                     },
-                    error: function (xhr, desc, err) {
+                    error: function(xhr, desc, err) {
                         console.log(xhr);
                         console.log("Details: " + desc + "\nError: " + err);
                     }
                 })
             });
-
-    /*
-    happy_heatmap = new google.maps.visualization.HeatmapLayer({
-    data: getPoints2(),
-    map: map
-    });
-
-    heatmap3 = new google.maps.visualization.HeatmapLayer({
-        data: test(),
-        map: map,
-        radius: 100
-    }); */
+            
+            $("button#happy").click(function() {});
+            $("button#sad").click(function() {});
+            $("button#both").click(function() {});
         }
 
 
-    function toggleHeatmap() {
-    "use strict";
-    heatmap.setMap(heatmap.getMap() ? null : map);
-    }
+        function toggleHeatmap() {
+            "use strict";
+            heatmap.setMap(heatmap.getMap() ? null : map);
+        }
 
-    /*function changeGradient() {
-    var gradient = [
-    'rgba(0, 255, 255, 0)',
-    'rgba(0, 0, 223, 1)',
-    'rgba(0, 0, 255, 1)',
-    'rgba(0, 63, 255, 1)',
-    'rgba(0, 127, 255, 1)',
-    'rgba(0, 191, 255, 1)',
-    'rgba(0, 255, 255, 1)',
-    'rgba(0, 255, 255, 0)', //Transparent
-    'rgba(0, 0, 191, 1)',
-    'rgba(0, 0, 159, 1)',
-    'rgba(0, 0, 127, 1)',
-    'rgba(63, 0, 91, 1)',
-    'rgba(127, 0, 63, 1)',
-    'rgba(191, 0, 31, 1)',
-    'rgba(0, 0, 191, 1)',
-    ]
-    heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
-    }
+        /*function changeGradient() {
+        var gradient = [
+        'rgba(0, 255, 255, 0)',
+        'rgba(0, 0, 223, 1)',
+        'rgba(0, 0, 255, 1)',
+        'rgba(0, 63, 255, 1)',
+        'rgba(0, 127, 255, 1)',
+        'rgba(0, 191, 255, 1)',
+        'rgba(0, 255, 255, 1)',
+        'rgba(0, 255, 255, 0)', //Transparent
+        'rgba(0, 0, 191, 1)',
+        'rgba(0, 0, 159, 1)',
+        'rgba(0, 0, 127, 1)',
+        'rgba(63, 0, 91, 1)',
+        'rgba(127, 0, 63, 1)',
+        'rgba(191, 0, 31, 1)',
+        'rgba(0, 0, 191, 1)',
+        ]
+        heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+        }
 
-    function changeRadius() {
-    heatmap.set('radius', heatmap.get('radius') ? null : 20);
-    }
+        function changeRadius() {
+        heatmap.set('radius', heatmap.get('radius') ? null : 20);
+        }
 
-    function changeOpacity() {
-    heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
-    }*/
+        function changeOpacity() {
+        heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
+        }*/
 
-    // Heatmap data: 500 Points
-
+        // Heatmap data: 500 Points
     </script>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=visualization&callback=initMap"></script>
@@ -239,5 +255,6 @@
 
 
 
-  </body>
+</body>
+
 </html>
