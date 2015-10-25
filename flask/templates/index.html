@@ -24,7 +24,6 @@
     <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script type="text/javascript" src="static/js/jquery-2.1.4.min.js"></script>
-
     <script type="text/javascript" src="static/js/app.js"></script>
 
 </head>
@@ -46,6 +45,7 @@
                     <h1>Title of Page</h1>
                     <h4>Lane8</h4>
                     <p>APIs, APIs, and more APIs</p>
+                    <p>My fave numbers: {% for n in range(1,10) %}{{n}} " " {% endfor %}</p>
                 </div>
             </div>
 
@@ -65,35 +65,112 @@
     <div id="map"></div>
 
     <script type="text/javascript">
-$(document).ready(function() {
-    $('button#submit').click(
-        function() {
-    $SCRIPT_ROOT = {{request.script_root | tojson | safe}};
-    var $value = $('#ideas option:selected').html();
-    $.ajax({
-        url: $SCRIPT_ROOT + '/_tweet_calcs', //TO DO
-        type: 'GET',
-        dataType: 'json',
-        data: {
-            'query' : $value
-        },
-        success: function(json) {
-            var array = [];
-            $.each(json, function (i, item) {
-                array.push(new google.maps.visualization.WeightLocation(google.maps.LatLng(json.lat, json.long), json.weight + 1.01));
+        /*global google*/
+        var map, heatmap;
+        $SCRIPT_ROOT = {{request.script_root | tojson | safe}};
+        
+        function initMap() {
+            "use strict";
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 4,
+                center: {lat: 38.8833, lng: -102.9833},
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                disableDefaultUI: true,
+                scrollwheel: false,
+                zoomControl: false,
+                navigationControl: false,
+                mapTypeControl: false,
+                scaleControl: false,
+                draggable: false,
+                disableDoubleClickZoom: true
             });
-            return array;
-        },
-        error: function (xhr, desc, err) {
-            console.log(xhr);
-            console.log("Details: " + desc + "\nError: " + err);
+            
+            $("button#submit").click(function() {
+                
+                var $value = $('#ideas option:selected').text();
+                $.ajax({
+                    url: $SCRIPT_ROOT + '/_tweet_calcs', //TO DO
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        'query' : $value
+                    },
+                    success: function(json) {
+                        console.log(json);
+                        var array = [];
+                        $.each(json.result, function (i, item) {
+                            var coordinates = new google.maps.LatLng(parseInt(json.result.lat), parseInt(json.result.lng));
+                            array.push(coordinates);
+                        }); 
+                                                
+
+                        var heatmap1 = new google.maps.visualization.HeatmapLayer({
+                            data: array,
+                            map: map,
+                            radius: 100
+                        });
+                    },
+                    error: function (xhr, desc, err) {
+                        console.log(xhr);
+                        console.log("Details: " + desc + "\nError: " + err);                
+                    }
+                })
+            });
+
+/*
+  happy_heatmap = new google.maps.visualization.HeatmapLayer({
+    data: getPoints2(),
+    map: map
+  });
+
+    heatmap3 = new google.maps.visualization.HeatmapLayer({
+        data: test(),
+        map: map,
+        radius: 100
+    }); */
         }
-   });
-   });
-   })
-   </script>
-                <script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&signed_in=true&libraries=visualization&callback=initMap">
-                </script>
+
+
+function toggleHeatmap() {
+  "use strict";
+    heatmap.setMap(heatmap.getMap() ? null : map);
+}
+
+/*function changeGradient() {
+  var gradient = [
+    'rgba(0, 255, 255, 0)',
+    'rgba(0, 0, 223, 1)',
+    'rgba(0, 0, 255, 1)',
+    'rgba(0, 63, 255, 1)',
+    'rgba(0, 127, 255, 1)',
+    'rgba(0, 191, 255, 1)',
+    'rgba(0, 255, 255, 1)',
+    'rgba(0, 255, 255, 0)', //Transparent
+    'rgba(0, 0, 191, 1)',
+    'rgba(0, 0, 159, 1)',
+    'rgba(0, 0, 127, 1)',
+    'rgba(63, 0, 91, 1)',
+    'rgba(127, 0, 63, 1)',
+    'rgba(191, 0, 31, 1)',
+    'rgba(0, 0, 191, 1)',
+  ]
+  heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+}
+
+function changeRadius() {
+  heatmap.set('radius', heatmap.get('radius') ? null : 20);
+}
+
+function changeOpacity() {
+  heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
+}*/
+
+// Heatmap data: 500 Points
+        
+    </script>
+    
+    <script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=visualization&callback=initMap"></script>
+    
 </body>
 
 </html>
