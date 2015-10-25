@@ -80,13 +80,13 @@
                     </div>
 =                </div>
                 <div class="col-md-8 col-md-pull-4">
-                    <div id='map'></div>f
+                    <div id='map'></div>
                 </div>
             </div>
         </div>
     </div>
     <div class="container-fluid">
-        <h3 class="text-center">Top 5</h3>
+        <h3 class="text-center">5 Bad Locations</h3>
         <div id='topFive'></div>
     </div>
     <footer>
@@ -102,6 +102,11 @@
             /*global google*/
             var map, sad_heatmap, happy_heatmap;
             $SCRIPT_ROOT = {{request.script_root | tojson | safe}};
+            
+            $(function() {
+            var temp="Choose!"; 
+            $("#ideas").val(temp);
+            });
 
             function initMap() {
                 "use strict";
