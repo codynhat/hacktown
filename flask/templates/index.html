@@ -41,38 +41,35 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-            Lane8
-        </a>
+                <a class="navbar-brand" href="#">Lane8</a>
                 <p class="navbar-text">lets get hacky</p>
             </div>
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="jumbotron">
-                <h1>What's the Hack is Going On in the United States</h1>
-               <p>APIs, APIs, and more APIs</p>
-            <form class="form-inline">
-            <input class="form-control" type="text" name="query" placeholder="Type in what you want to search!">
-            <select class="form-control" id = 'ideas'>
-                <option>Star Wars</option>
-                <option>Obama</option>
-                <option>Trump</option>
-                <option>Adele</option>
-            </select>
-            <button id="submit" type="button" class="btn btn-default">Submit</button>
-            
-            <div class='btn-group'>
-                <button id="happy" type="button" class="btn btn-default">Happiness</button>
-                <button id="sadness" type="button" class="btn btn-default">Sadness</button>
-                <button id="both" type="button" class="btn btn-default">Both</button>
-            </div>
-    </form>
+                <h1>What the Hack is Going On in the United States</h1>
+                <p>APIs, APIs, and more APIs</p>
+                <form class="form-inline">
+                    <select class="form-control" id='ideas'>
+                        <option>Star Wars</option>
+                        <option>Obama</option>
+                        <option>Trump</option>
+                        <option>Adele</option>
+                    </select>
+                    <button id="submit" type="button" class="btn btn-default">Submit</button>
+                    <div class='btn-group'>
+                        <button id="happy" type="button" class="btn btn-default">Happiness</button>
+                        <button id="sadness" type="button" class="btn btn-default">Sadness</button>
+                        <button id="both" type="button" class="btn btn-default">Both</button>
+                    </div>
+                </form>
             </div>
         </div>
-<div class="container-fluid">
+    </div>
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class ="col-md-4 col-md-push-8">
@@ -81,188 +78,168 @@
                             
                         </ul>
                     </div>
+                </div>
+                <div class="col-md-8 col-md-pull-4">
+                    <div id='map'></div>
+                </div>
             </div>
-    <div class="col-md-8 col-md-pull-4">
-        <div id='map'></div>
+        </div>
     </div>
+    <footer>
+        <div class="container">
 
-</div>
-</div>
-</div>
+        <h4 class="text-center">Holla</h4>
 
+        </div>
+    </footer>
 
-    <script type="text/javascript">
-        /*global google*/
-        var map, sad_heatmap, happy_heatmap;
-        $SCRIPT_ROOT = {{request.script_root | tojson | safe}};
+        <script type="text/javascript">
+            /*global google*/
+            var map, sad_heatmap, happy_heatmap;
+            $SCRIPT_ROOT = {{request.script_root | tojson | safe}};
 
-        function initMap() {
-            "use strict";
-            map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 4,
-                center: {lat: 38.8833, lng: -95.9833},
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                disableDefaultUI: true,
-                scrollwheel: false,
-                zoomControl: false,
-                navigationControl: false,
-                mapTypeControl: false,
-                scaleControl: false,
-                draggable: false,
-                disableDoubleClickZoom: false
-            });
-            var happy_gradient = [
-                'rgba(255, 255, 255, 0)', //Transparent
-                'rgba(255, 255, 150, 1)',
-                'rgba(255, 255, 120, 1)',
-                'rgba(255, 255, 90, 1)',
-                'rgba(255, 255, 60, 1)',
-                'rgba(255, 255, 40, 1)',
-                'rgba(255, 255, 0, 1)'
-
-            ]
-
-            var sad_gradient = [
-                'rgba(255, 255, 255, 0)',
-                'rgba(255, 200, 200, 1)',
-                'rgba(255, 160, 100, 1)',
-                'rgba(255, 120, 60, 1)',
-                'rgba(255, 80, 40, 1)',
-                'rgba(255, 40, 20, 1)',
-                'rgba(255, 0, 0, 1)'
-            ]
-
-            $("button#submit").click(function() {
-
-                var $value = $('#ideas option:selected').text();
-                $("#tweeter a").attr("href", "https://twitter.com/search?q=" + $value);
-                $.ajax({
-                    url: $SCRIPT_ROOT + '/_tweet_calcs', //TO DO
-                    type: 'GET',
-                    dataType: 'json',
-                    data: {
-                        'query': $value
+            function initMap() {
+                "use strict";
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 4,
+                    center: {
+                        lat: 38.8833,
+                        lng: -95.9833
                     },
-                    success: function(json) {
-                        console.log(json);
-                        var happy_array = [];
-                        var sad_array = [];
-                        $.each(json.result, function(i, item) {
-                            var coordinates = new google.maps.LatLng(parseInt(item.lat), parseInt(item.lng));
-                            if (item.wgt < 0) {
-                                var weightedLoc = {
-                                    location: coordinates,
-                                    weight: item.wgt * -100
-                                };
-                                sad_array.push(weightedLoc);
-                            } else if (item.wgt > 0) {
-                                var weightedLoc = {
-                                    location: coordinates,
-                                    weight: item.wgt * 100
-                                };
-                                happy_array.push(weightedLoc);
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    disableDefaultUI: true,
+                    scrollwheel: false,
+                    zoomControl: false,
+                    navigationControl: false,
+                    mapTypeControl: false,
+                    scaleControl: false,
+                    draggable: false,
+                    disableDoubleClickZoom: false
+                });
+                var happy_gradient = [
+                    'rgba(255, 255, 255, 0)', //Transparent
+                    'rgba(255, 255, 150, 1)',
+                    'rgba(255, 255, 120, 1)',
+                    'rgba(255, 255, 90, 1)',
+                    'rgba(255, 255, 60, 1)',
+                    'rgba(255, 255, 40, 1)',
+                    'rgba(255, 255, 0, 1)'
+
+                ]
+
+                var sad_gradient = [
+                    'rgba(255, 255, 255, 0)',
+                    'rgba(255, 200, 200, 1)',
+                    'rgba(255, 160, 100, 1)',
+                    'rgba(255, 120, 60, 1)',
+                    'rgba(255, 80, 40, 1)',
+                    'rgba(255, 40, 20, 1)',
+                    'rgba(255, 0, 0, 1)'
+                ]
+
+                $("button#submit").click(function() {
+
+                    var $value = $('#ideas option:selected').text();
+                    $("#tweeter a").attr("href", "https://twitter.com/search?q=" + $value);
+                    $.ajax({
+                        url: $SCRIPT_ROOT + '/_tweet_calcs', //TO DO
+                        type: 'GET',
+                        dataType: 'json',
+                        data: {
+                            'query': $value
+                        },
+                        success: function(json) {
+                            console.log(json);
+                            var happy_array = [];
+                            var sad_array = [];
+                            $.each(json.result, function(i, item) {
+                                var coordinates = new google.maps.LatLng(parseInt(item.lat), parseInt(item.lng));
+                                if (item.wgt < 0) {
+                                    var weightedLoc = {
+                                        location: coordinates,
+                                        weight: item.wgt * -100
+                                    };
+                                    sad_array.push(weightedLoc);
+                                } else if (item.wgt > 0) {
+                                    var weightedLoc = {
+                                        location: coordinates,
+                                        weight: item.wgt * 100
+                                    };
+                                    happy_array.push(weightedLoc);
+                                }
+                                $('#tweeter ul').append('<li><h2>' + item.name + '</h2><p>' + item.text + '<p></li>');
+                            });
+                            
+                            
+                        
+                            if(typeof sad_heatmap !== 'undefined' ){
+                                sad_heatmap.setMap(null);
                             }
-                            $('#tweeter ul').append('<li><h2>' + item.name + '</h2><p>' + item.text + '<p></li>');
-                        });
-                        if(typeof sad_heatmap !== 'undefined' ){
-                            sad_heatmap.setMap(null);
+
+                            if(typeof happy_heatmap !== 'undefined' ){
+                                happy_heatmap.setMap(null);
+                            }
+
+                            
+                            sad_heatmap = new google.maps.visualization.HeatmapLayer({
+                                data: sad_array,
+                                map: map,
+                                radius: 100,
+                                gradient: sad_gradient,
+                                opacity: .5
+                            });
+                            
+                            happy_heatmap = new google.maps.visualization.HeatmapLayer({
+                                data: happy_array,
+                                map: map,
+                                radius: 100,
+                                gradient: happy_gradient,
+                                opacity: .5
+                            });
+
+                        },
+                        error: function(xhr, desc, err) {
+                            console.log(xhr);
+                            console.log("Details: " + desc + "\nError: " + err);
                         }
-                        if(typeof happy_heatmap !== 'undefined' ){
-                            happy_heatmap.setMap(null);
-                        }
+                    })
+                });
 
-                        sad_heatmap = new google.maps.visualization.HeatmapLayer({
-                            data: sad_array,
-                            map: map,
-                            radius: 100,
-                            gradient: sad_gradient,
-                            opacity: .5
-                        });
-
-
-                        happy_heatmap = new google.maps.visualization.HeatmapLayer({
-                            data: happy_array,
-                            map: map,
-                            radius: 100,
-                            gradient: happy_gradient,
-                            opacity: .5
-                        });
-
-                    },
-                    error: function(xhr, desc, err) {
-                        console.log(xhr);
-                        console.log("Details: " + desc + "\nError: " + err);
+                $("button#happy").click(function() {
+                    if(typeof sad_heatmap !== 'undefined' ){
+                        sad_heatmap.setMap(null);
                     }
-                })
-            });
+                    if(typeof happy_heatmap !== 'undefined' ){
+                        happy_heatmap.setMap(map);
+                    }
+                });
+                $("button#sadness").click(function() {
+                    if(typeof sad_heatmap !== 'undefined' ){
+                        sad_heatmap.setMap(map);
+                    }
+                    if(typeof happy_heatmap !== 'undefined' ){
+                        happy_heatmap.setMap(null);
+                    }
+                });
+                $("button#both").click(function() {
+                    if(typeof sad_heatmap !== 'undefined' ){
+                        sad_heatmap.setMap(map);
+                    }
+                    if(typeof happy_heatmap !== 'undefined' ){
+                        happy_heatmap.setMap(map);
+                    }
+                });
+            }
+
+
             
-            $("button#happy").click(function() {
-                if(typeof sad_heatmap !== 'undefined' ){
-                    sad_heatmap.setMap(null);
-                }
-                if(typeof happy_heatmap !== 'undefined' ){
-                    happy_heatmap.setMap(map);
-                }
-            });
-            $("button#sadness").click(function() {
-                if(typeof sad_heatmap !== 'undefined' ){
-                    sad_heatmap.setMap(map);
-                }
-                if(typeof happy_heatmap !== 'undefined' ){
-                    happy_heatmap.setMap(null);
-                }
-            });
-            $("button#both").click(function() {
-                if(typeof sad_heatmap !== 'undefined' ){
-                    sad_heatmap.setMap(map);
-                }
-                if(typeof happy_heatmap !== 'undefined' ){
-                    happy_heatmap.setMap(map);
-                }
-            });
-        }
+            
 
 
-        function toggleHeatmap() {
-            "use strict";
-            heatmap.setMap(heatmap.getMap() ? null : map);
-        }
-
-        /*function changeGradient() {
-        var gradient = [
-        'rgba(0, 255, 255, 0)',
-        'rgba(0, 0, 223, 1)',
-        'rgba(0, 0, 255, 1)',
-        'rgba(0, 63, 255, 1)',
-        'rgba(0, 127, 255, 1)',
-        'rgba(0, 191, 255, 1)',
-        'rgba(0, 255, 255, 1)',
-        'rgba(0, 255, 255, 0)', //Transparent
-        'rgba(0, 0, 191, 1)',
-        'rgba(0, 0, 159, 1)',
-        'rgba(0, 0, 127, 1)',
-        'rgba(63, 0, 91, 1)',
-        'rgba(127, 0, 63, 1)',
-        'rgba(191, 0, 31, 1)',
-        'rgba(0, 0, 191, 1)',
-        ]
-        heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
-        }
-
-        function changeRadius() {
-        heatmap.set('radius', heatmap.get('radius') ? null : 20);
-        }
-
-        function changeOpacity() {
-        heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
-        }*/
-
-        // Heatmap data: 500 Points
+    
     </script>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=visualization&callback=initMap"></script>
-
-
 
 
 </body>
