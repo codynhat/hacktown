@@ -61,7 +61,7 @@
                         <option>Adele</option>
                     </select>
                     <div class='btn-group'>
-                        <button id="both" type="button" class="btn btn-default">Both</button>
+                        <button id="all" type="button" class="btn btn-default">All</button>
                         <button id="happy" type="button" class="btn btn-default">Positive</button>
                         <button id="neutral" type="button" class="btn btn-default">Neutral</button>
                         <button id="sadness" type="button" class="btn btn-default">Negative</button>
@@ -86,11 +86,17 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <br>
     <br>
     <div class="panel">
         <h3>Location Samples</h3>
         <div class = "row" id='topFive'></div>
+=======
+    <div class="container-fluid">
+        <h3 class="text-center">Top 5 Bad Locations</h3>
+        <div id='topFive'></div>
+>>>>>>> d9afdbad9187fb056e6d5d0402f8bdd3e5999711
     </div>
     <footer>
         <div class="container">
@@ -103,7 +109,7 @@
 
         <script type="text/javascript">
             /*global google*/
-            var map, sad_heatmap, happy_heatmap;
+            var map, sad_heatmap, happy_heatmap, neutral_heatmap;
             $SCRIPT_ROOT = {{request.script_root | tojson | safe}};
             
             $(function() {
@@ -149,6 +155,16 @@
                     'rgba(255, 40, 20, 1)',
                     'rgba(255, 0, 0, 1)'
                 ]
+                
+                var neutral_gradient = [
+                    'rgba(255, 255, 255, 0)',
+                    'rgba(0, 208, 229, 1)',
+                    'rgba(0, 190, 225, 1)',
+                    'rgba(0, 172, 221, 1)',
+                    'rgba(0, 139, 213, 1)',
+                    'rgba(0, 92, 202, 1)',
+                    'rgba(0, 64, 194, 1)'
+                ]
 
                 $("select#ideas").change(function() {
                     
@@ -179,6 +195,7 @@
                         }
                     });
 
+                    
                     var $value = $('#ideas option:selected').text();
                     $("#tweeter a").attr("href", "https://twitter.com/search?q=" + $value);
                     $('#tweeter ul').empty();
@@ -193,6 +210,7 @@
                             console.log(json);
                             var happy_array = [];
                             var sad_array = [];
+                            var neutral_array = [];
                             $.each(json.result, function(i, item) {
                                 console.log(item.name);
                                 var coordinates = new google.maps.LatLng(parseInt(item.lat), parseInt(item.lng));
@@ -210,8 +228,15 @@
                                     };
                                     happy_array.push(weightedLoc);
                                     $('#tweeter ul').append('<li id="happy"><h2>' + item.name + '</h2><p>' + item.text + '<p></li>');
+                                } else if (item.wgt == 0) {
+                                    var weightedLoc = {
+                                        location: coordinates,
+                                        weight: 0
+                                    };
+                                    neutral_array.push(weightedLoc);
+                                    $('#tweeter ul').append('<li id="neutral"><h2>' + item.name + '</h2><p>' + item.text + '<p></li>');
                                 }
-                                
+    
                             });
 
 
@@ -223,15 +248,24 @@
                             if(typeof happy_heatmap !== 'undefined' ){
                                 happy_heatmap.setMap(null);
                             }
+                            
+                            if(typeof neutral_heatmap !== 'undefined' ){
+                                neutral_heatmap.setMap(null);
+                            }
 
-                            $("button#both").css("background-color", "#FFA500");
+                            $("button#all").css("background-color", "#FFA500");
                             $("button#sadness").css("background-color", "#FFFFFF");
+                            $("button#neutral").css("background-color", "#FFFFFF");
                             $("button#happy").css("background-color", "#FFFFFF");
                             
                             sad_heatmap = new google.maps.visualization.HeatmapLayer({
                                 data: sad_array,
                                 map: map,
+<<<<<<< HEAD
                                 radius:70,
+=======
+                                radius: 80,
+>>>>>>> d9afdbad9187fb056e6d5d0402f8bdd3e5999711
                                 gradient: sad_gradient,
                                 opacity: .5
                             });
@@ -239,8 +273,20 @@
                             happy_heatmap = new google.maps.visualization.HeatmapLayer({
                                 data: happy_array,
                                 map: map,
+<<<<<<< HEAD
                                 radius: 70,
+=======
+                                radius: 80,
+>>>>>>> d9afdbad9187fb056e6d5d0402f8bdd3e5999711
                                 gradient: happy_gradient,
+                                opacity: .5
+                            });
+                            
+                            neutral_heatmap = new google.maps.visualization.HeatmapLayer({
+                                data: neutral_array,
+                                map: map,
+                                radius: 80,
+                                gradient: neutral_gradient,
                                 opacity: .5
                             });
 
@@ -259,10 +305,15 @@
                     if(typeof happy_heatmap !== 'undefined' ){
                         happy_heatmap.setMap(map);
                     }
+                    if(typeof neutral_heatmap !== 'undefined' ){
+                        neutral_heatmap.setMap(null);
+                    }
                     $(this).css("background-color", "#FFF000");
                     $("button#sadness").css("background-color", "#FFFFFF");
-                    $("button#both").css("background-color", "#FFFFFF");
+                    $("button#all").css("background-color", "#FFFFFF");
+                    $("button#neutral").css("background-color", "#FFFFFF");
                     $("li#happy").show();
+                    $("li#neutral").hide();
                     $("li#sad").hide();
                 });
                 $("button#sadness").click(function() {
@@ -272,24 +323,52 @@
                     if(typeof happy_heatmap !== 'undefined' ){
                         happy_heatmap.setMap(null);
                     }
+                    if(typeof neutral_heatmap !== 'undefined' ){
+                        neutral_heatmap.setMap(null);
+                    }
                     $(this).css("background-color", "#FF0000");
                     $("button#happy").css("background-color", "#FFFFFF");
-                    $("button#both").css("background-color", "#FFFFFF");
+                    $("button#all").css("background-color", "#FFFFFF");
+                    $("button#neutral").css("background-color", "#FFFFFF");
                     $("li#happy").hide();
+                    $("li#neutral").hide();
                     $("li#sad").show();
                 });
-                $("button#both").click(function() {
+                $("button#all").click(function() {
                     if(typeof sad_heatmap !== 'undefined' ){
                         sad_heatmap.setMap(map);
                     }
                     if(typeof happy_heatmap !== 'undefined' ){
                         happy_heatmap.setMap(map);
                     }
+                    if(typeof neutral_heatmap !== 'undefined' ){
+                        neutral_heatmap.setMap(map);
+                    }
                     $(this).css("background-color", "#FFA500");
                     $("button#sadness").css("background-color", "#FFFFFF");
                     $("button#happy").css("background-color", "#FFFFFF");
+                    $("button#neutral").css("background-color", "#FFFFFF");
+                    $("li#neutral").show();
                     $("li#happy").show();
                     $("li#sad").show();
+                });
+                $("button#neutral").click(function() {
+                    if(typeof sad_heatmap !== 'undefined' ){
+                        sad_heatmap.setMap(null);
+                    }
+                    if(typeof happy_heatmap !== 'undefined' ){
+                        happy_heatmap.setMap(null);
+                    }
+                    if(typeof neutral_heatmap !== 'undefined' ){
+                        neutral_heatmap.setMap(map);
+                    }
+                    $(this).css("background-color", "#0000FF");
+                    $("button#sadness").css("background-color", "#FFFFFF");
+                    $("button#happy").css("background-color", "#FFFFFF");
+                    $("button#all").css("background-color", "#FFFFFF");
+                    $("li#neutral").show();
+                    $("li#happy").hide();
+                    $("li#sad").hide();
                 });
             }
 
