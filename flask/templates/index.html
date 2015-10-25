@@ -89,7 +89,40 @@
     <button id="submit" type="button" class="btn btn-default" onclick="getPoints()">Submit</button>
     </div>
 
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+
+        <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+            <div class="row">
+                <div class="u-max-full-width column">
+                    <h1>Title of Page</h1>
+                    <h4>Lane8</h4>
+                    <p>APIs, APIs, and more APIs</p>
+                </div>
+            </div>
+
+                <div class="container">
+                    <div class="row">
+                        <input type="text" name="query" placeholder="Type in what you want to search!">
+                        <select id = 'ideas'>
+                            <option>Basketball</option>
+                            <option>Oregon</option>
+                            <option>Kim Kardashian</option>
+                            <option>Adele</option>
+                        </select>
+                        <button id="submit" type="button" class="btn btn-default" onclick="getPoints()">Submit</button>
+                        </div>
+                    </div>
+    
     <div id="map"></div>
+    
+    
     <div id="tweeter">
     <a class="twitter-timeline" href="https://twitter.com/search?q=corgi" data-widget-id="658116944541843456"></a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </div>
