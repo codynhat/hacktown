@@ -26,54 +26,54 @@ def main():
             numberofqueries = int(sys.argv[2])
 
     valueswecareabout = []
-    query = getTweets(api, term, 0)
-    lastid = logTweets(query, valueswecareabout)
-
-    for i in range(numberofqueries - 1):
-        if lastid == -1:
-            break
-        query = getTweets(api, term, lastid - 1)
-        lastid = logTweets(query, valueswecareabout)
-    
     possentiment = 0
     negsentiment = 0
     sentcount = 0
     goodlocs=0
     locations = []
     locations_needed = []
-    for tweet in valueswecareabout:
-        score = getSentiment(tweet[0])
-        if score > 0.01:
-            possentiment += score
-            sentcount += 1
-        elif score < -0.01:
-            negsentiment += score
-            sentcount += 1
+    i = 0 # iterate through queries
+    
+    query = getTweets(api, term)
+    lastid = logTweets(query, valueswecareabout)
 
-        lat = None
-        lng = None
-        if tweet[2] != None:
-            lat = tweet[2]["coordinates"][0]
-            lng = tweet[2]["coordinates"][1]
-        if lat == None or lng == None:
-            if len(tweet[1]) > 0:
-                #print tweet[1].encode('utf-8')
-                locations.append(tweet[1])
-                locations_needed.append((tweet[5],score))
-            continue
-        # print score
-        goodlocs+=1
-        es.index(index="index", doc_type=term, body={
-                 "lat": lat, "lng": lng, "score": score,"name":tweet[6],"text":tweet[0]}, id=tweet[5])
-
-    c = 0
-    while(c < len(locations)):
-        latLngs = getLatLng(locations[c:c+100])
+    while i<numberofqueries:
+        if lastid == -1:
+            break
+        
+        #insert code
+        for (num, tweet) in enumerate(valueswecareabout):
+            # score the tweet
+            score = getSentiment(tweet[0])
+            if score > 0.01:
+                possentiment += score
+                sentcount += 1
+            elif score < -0.01:
+                negsentiment += score
+                sentcount += 1
+            
+            lat = None
+            lng = None
+            if tweet[2] != None:
+                lat = tweet[2]["coordinates"][0]
+                lng = tweet[2]["coordinates"][1]
+            if lat == None or lng == None:
+                if len(tweet[1]) > 0:
+                    #print tweet[1].encode('utf-8')
+                    locations.append(tweet[1])
+                    locations_needed.append((tweet[5],score, num))
+                continue
+            # print score
+            goodlocs+=1
+            es.index(index="index", doc_type=term, body={
+                     "lat": lat, "lng": lng, "score": score,"name":tweet[6],"text":tweet[0]}, id=tweet[5])
+        
+        latLngs = getLatLng(locations)
         for a in range(len(latLngs)):
             latLng = latLngs[a]
-            tweet = locations_needed[c+a]
+            tweet = locations_needed[a]
             if latLng == None:
-                es.index(index="index", doc_type="bad", body={"location":valueswecareabout[c+a][1]})
+                es.index(index="index", doc_type="bad", body={"location":valueswecareabout[tweet[2]][1]},id = tweet[0])
                 continue
             goodlocs+=1
             lat = latLng["lat"]
@@ -81,13 +81,19 @@ def main():
             score = tweet[1]
             print tweet[0]
             es.index(index="index", doc_type=term, body={
-                   "lat": lat, "lng": lng, "score": score, "name":valueswecareabout[c+a][6],"text":valueswecareabout[c+a][0]}, id=tweet[0])
-        c += 100
+                   "lat": lat, "lng": lng, "score": score, "name":valueswecareabout[tweet[2]][6],"text":valueswecareabout[tweet[2]][0]}, id=tweet[0])
+        
+        valueswecareabout = []
+        locations_needed=[]
+        locations=[]
+        query = getTweets(api, term, lastid - 1)
+        lastid = logTweets(query, valueswecareabout)
+        i += 1
 
-    print len(valueswecareabout), goodlocs, sentcount, possentiment, negsentiment
+    print goodlocs, sentcount, possentiment, negsentiment
 
 
-def getTweets(api, searchterm, last_id):
+def getTweets(api, searchterm, last_id=None):
     if last_id:
         query = api.GetSearch(term=searchterm, count=100,
                               lang="en", max_id=last_id)
