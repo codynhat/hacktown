@@ -51,6 +51,9 @@
 
     <div class="container">
         <div class="row">
+            <div class="jumbotron">
+                <h1>What's the Hack is Going On in the United States</h1>
+               <p>APIs, APIs, and more APIs</p>
             <form class="form-inline">
             <input class="form-control" type="text" name="query" placeholder="Type in what you want to search!">
             <select class="form-control" id = 'ideas'>
@@ -65,25 +68,26 @@
         </div>
 <div class="container-fluid">
         <div class="row">
-
-<div class="col-md-12">
-    <div class="col-md-8 col-md-push-4">
+            <div class="col-md-12">
+                <div class ="col-md-4 col-md-push-8">
+                    <div id="tweeter">
+                        <ul>
+                            <li><div>
+                                <h1>YAY</h1>
+                                <p>Maybe</p>
+                                </div></li>
+                            <li>BOBY</li>
+                            <li>DOG</li>
+                        </ul>
+                    </div>
+            </div>
+    <div class="col-md-8 col-md-pull-4">
         <div id='map'></div>
     </div>
-    <div class ="col-md-4 col-md-pull-8">
-        <div id="tweeter">
-            <ul>
-                <li><div>
-                    <h1>YAY</h1>
-                    <p>Maybe</p>
-                    </div></li>
-                <li>BOBY</li>
-                <li>DOG</li>
-            </ul>
-        </div>
 
-    </div>
-
+</div>
+</div>
+</div>
 
 
     <script type="text/javascript">
@@ -147,13 +151,13 @@
                             if (item.wgt < 0) {
                                 var weightedLoc = {
                                     location: coordinates,
-                                    weight: item.wgt * -1
+                                    weight: item.wgt * -100
                                 };
                                 sad_array.push(weightedLoc);
                             } else if (item.wgt > 0) {
                                 var weightedLoc = {
                                     location: coordinates,
-                                    weight: item.wgt
+                                    weight: item.wgt * 100
                                 };
                                 happy_array.push(weightedLoc);
                             }
