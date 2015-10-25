@@ -1,67 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <head>
     <meta charset="utf-8">
-    <title>Your page title here :)</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>HackTownUSA</title>
 
-    <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="static/js/app.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <ul class=flashes>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      {% endif %} {% endwith %}
 
-    <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="stylesheet" href="static/css/normalize.css">
-    <link rel="stylesheet" href="static/css/skeleton.css">
-    <link rel="stylesheet" href="static/css/styles.css">
-    <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <script type="text/javascript" src="static/js/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="static/js/app.js"></script>
+<!----- NAVIGATION ------------->
+      <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+     <ul class="nav navbar-nav">
+       <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+       <li><a href="#">Link</a></li>
+       <li class="dropdown">
+         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+         <ul class="dropdown-menu">
+           <li><a href="#">Action</a></li>
+           <li><a href="#">Another action</a></li>
+           <li><a href="#">Something else here</a></li>
+           <li role="separator" class="divider"></li>
+           <li><a href="#">Separated link</a></li>
+           <li role="separator" class="divider"></li>
+           <li><a href="#">One more separated link</a></li>
+         </ul>
+       </li>
+     </ul>
+     <form class="navbar-form navbar-left" role="search">
+       <div class="form-group">
+         <input type="text" class="form-control" placeholder="Search">
+       </div>
+       <button type="submit" class="btn btn-default">Submit</button>
+     </form>
+     <ul class="nav navbar-nav navbar-right">
+       <li><a href="#">Link</a></li>
+       <li class="dropdown">
+         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+         <ul class="dropdown-menu">
+           <li><a href="#">Action</a></li>
+           <li><a href="#">Another action</a></li>
+           <li><a href="#">Something else here</a></li>
+           <li role="separator" class="divider"></li>
+           <li><a href="#">Separated link</a></li>
+         </ul>
+       </li>
+     </ul>
+   </div><!-- /.navbar-collapse -->
+ </div><!-- /.container-fluid -->
+</nav>
 
-</head>
 
-<body>
+<div class="row">
+    <input type="text" name="query" placeholder="Type in what you want to search!">
+    <select id = 'ideas'>
+        <option>Basketball</option>
+        <option>Oregon</option>
+        <option>Kim Kardashian</option>
+        <option>Adele</option>
+    </select>
+    <button id="submit" type="button" class="btn btn-default" onclick="getPoints()">Submit</button>
+    </div>
 
-    {% with messages = get_flashed_messages() %} {% if messages %}
-    <ul class=flashes>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %} {% endwith %}
-
-        <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-            <div class="row">
-                <div class="u-max-full-width column">
-                    <h1>Title of Page</h1>
-                    <h4>Lane8</h4>
-                    <p>APIs, APIs, and more APIs</p>
-                    <p>My fave numbers: {% for n in range(1,10) %}{{n}} " " {% endfor %}</p>
-                </div>
-            </div>
-
-                <div class="container">
-                    <div class="row">
-                        <input type="text" name="query" placeholder="Type in what you want to search!">
-                        <select id = 'ideas'>
-                            <option>Basketball</option>
-                            <option>Oregon</option>
-                            <option>Kim Kardashian</option>
-                            <option>Adele</option>
-                        </select>
-                        <button id="submit" type="button" class="btn btn-default" onclick="getPoints()">Submit</button>
-                        </div>
-                    </div>
-                </div>
     <div id="map"></div>
     <div id="tweeter">
     <a class="twitter-timeline" href="https://twitter.com/search?q=corgi" data-widget-id="658116944541843456"></a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -71,7 +98,7 @@
         /*global google*/
         var map, heatmap;
         $SCRIPT_ROOT = {{request.script_root | tojson | safe}};
-        
+
         function initMap() {
             "use strict";
             map = new google.maps.Map(document.getElementById('map'), {
@@ -95,9 +122,9 @@
                 'rgba(255, 0, 30, 1)',
                 'rgba(255, 0, 20, 1)',
                 'rgba(255, 0, 0, 1)',//start
-                
+
             ]
-            
+
             var sad_gradient = [
                 'rgba(0, 255, 255, 0)',
                 'rgba(0, 100, 255, 1)',
@@ -107,9 +134,9 @@
                 'rgba(0, 20, 200, 1)',
                 'rgba(0, 0, 200, 1)',
             ]
-            
+
             $("button#submit").click(function() {
-                
+
                 var $value = $('#ideas option:selected').text();
                 $("#tweeter a").attr("href", "https://twitter.com/search?q=" + $value);
                 twttr.widgets.load();
@@ -133,8 +160,8 @@
                                 var weightedLoc = {location: coordinates, weight: item.wgt};
                                 happy_array.push(weightedLoc);
                             }
-                        }); 
-                                                
+                        });
+
 
                         var happy_heatmap = new google.maps.visualization.HeatmapLayer({
                             data: happy_array,
@@ -149,20 +176,20 @@
                             gradient: sad_gradient,
                             opacity: .6
                         });
-                        
+
                     },
                     error: function (xhr, desc, err) {
                         console.log(xhr);
-                        console.log("Details: " + desc + "\nError: " + err);                
+                        console.log("Details: " + desc + "\nError: " + err);
                     }
                 })
             });
 
-/*
-  happy_heatmap = new google.maps.visualization.HeatmapLayer({
+    /*
+    happy_heatmap = new google.maps.visualization.HeatmapLayer({
     data: getPoints2(),
     map: map
-  });
+    });
 
     heatmap3 = new google.maps.visualization.HeatmapLayer({
         data: test(),
@@ -172,13 +199,13 @@
         }
 
 
-function toggleHeatmap() {
-  "use strict";
+    function toggleHeatmap() {
+    "use strict";
     heatmap.setMap(heatmap.getMap() ? null : map);
-}
+    }
 
-/*function changeGradient() {
-  var gradient = [
+    /*function changeGradient() {
+    var gradient = [
     'rgba(0, 255, 255, 0)',
     'rgba(0, 0, 223, 1)',
     'rgba(0, 0, 255, 1)',
@@ -194,24 +221,29 @@ function toggleHeatmap() {
     'rgba(127, 0, 63, 1)',
     'rgba(191, 0, 31, 1)',
     'rgba(0, 0, 191, 1)',
-  ]
-  heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
-}
+    ]
+    heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+    }
 
-function changeRadius() {
-  heatmap.set('radius', heatmap.get('radius') ? null : 20);
-}
+    function changeRadius() {
+    heatmap.set('radius', heatmap.get('radius') ? null : 20);
+    }
 
-function changeOpacity() {
-  heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
-}*/
+    function changeOpacity() {
+    heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
+    }*/
 
-// Heatmap data: 500 Points
-        
+    // Heatmap data: 500 Points
+
     </script>
-    
-    <script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=visualization&callback=initMap"></script>
-    
-</body>
 
+    <script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=visualization&callback=initMap"></script>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
 </html>
