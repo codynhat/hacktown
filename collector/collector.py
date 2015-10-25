@@ -110,7 +110,7 @@ def getLatLng(locations):
     for location in locations:
         payload.append(('location',location))
     r = requests.get('http://www.mapquestapi.com/geocoding/v1/batch?', data={
-        'key': '7N1MeC0H0uFcbyzovGkG8SPFu5SdPUjU',
+        'key': 'Ch0PhK6sUaGxQJRlogATGflCMRTgVQAq',
         'inFormat': 'json',
         'outFormat': 'json',
         'maxResults': 1,
