@@ -11,6 +11,9 @@ footer {
     background: url(http://www.pixeden.com/media/k2/galleries/112/003-subtle-light-pattern-background-texture.jpg);
     margin: 40px 0px;
 }
+table#tweeter strong{
+    text-transform: uppercase;
+}
 
 #bad{
     text-align: center;
@@ -54,15 +57,12 @@ h3{
     z-index: 5;
 }
 
-#tweeter{
-  border:1px solid #000;
-  font-family:arial;
+.tweet{
+  border:1px solid #fefefe;
   height:600px;
-  width:100%;
   background: white;
 }
-ul{
-  list-style:none;
+.tweet{
   max-height:598px;
   margin:0;
   overflow:auto;

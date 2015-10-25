@@ -83,11 +83,13 @@
         <div class="row">
             <div class="col-md-12" style="padding:0">
                 <div class ="col-md-4 col-md-push-8" style="padding:0">
-                    <div id="tweeter">
-                        <ul>
+<div class="tweet">
+                        <table class = "table" id="tweeter">
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
 
-                        </ul>
-                    </div>
                </div>
                 <div class="col-md-8 col-md-pull-4" style="padding:0">
                     <div id='map'></div>
@@ -138,9 +140,9 @@
             /*global google*/
             var map, sad_heatmap, happy_heatmap, neutral_heatmap;
             $SCRIPT_ROOT = {{request.script_root | tojson | safe}};
-            
+
             $(function() {
-            var temp="Choose!"; 
+            var temp="Choose!";
             $("#ideas").val(temp);
             });
 
@@ -182,7 +184,7 @@
                     'rgba(255, 40, 20, 1)',
                     'rgba(255, 0, 0, 1)'
                 ]
-                
+
                 var neutral_gradient = [
                     'rgba(255, 255, 255, 0)',
                     'rgba(0, 234, 255, 1)',
@@ -194,7 +196,7 @@
                 ]
 
                 $("select#ideas").change(function() {
-                    
+
                     $.ajax({
                         url: $SCRIPT_ROOT + '/munging',
                         type: 'GET',
@@ -222,14 +224,14 @@
                         }
                     });
 
-                    
+
                     var $value = $('#ideas option:selected').text();
                     $("#tweeter a").attr("href", "https://twitter.com/search?q=" + $value);
-                    $('#tweeter ul').empty();
+                    $('#tweeter').find('tbody').empty();
                     $.ajax({
                         url: $SCRIPT_ROOT + '/_tweet_calcs', //TO DO
                         type: 'GET',
-                        dataType: 'json', 
+                        dataType: 'json',
                         data: {
                             'query': $value
                         },
@@ -245,23 +247,24 @@
                                         weight: item.wgt * -100
                                     };
                                     sad_array.push(weightedLoc);
-                                    $('#tweeter ul').append('<li id="sad"><h2>' + item.name + '</h2><p>' + item.text + '<p></li>');
+
+                                    $('#tweeter').find('tbody').append('<tr><td id="sad"><strong>' + item.name + '</strong><p>' + item.text + '<p></td></tr>');
                                 } else if (item.wgt > 0) {
                                     var weightedLoc = {
                                         location: coordinates,
                                         weight: item.wgt * 100
                                     };
                                     happy_array.push(weightedLoc);
-                                    $('#tweeter ul').append('<li id="happy"><h2>' + item.name + '</h2><p>' + item.text + '<p></li>');
+                                    $('#tweeter').find('tbody').append('<tr><td id="happy"><strong>' + item.name + '</strong><p>' + item.text + '<p></td></tr>');
                                 } else if (item.wgt == 0) {
                                     var weightedLoc = {
                                         location: coordinates,
                                         weight: 0
                                     };
                                     neutral_array.push(weightedLoc);
-                                    $('#tweeter ul').append('<li id="neutral"><h2>' + item.name + '</h2><p>' + item.text + '<p></li>');
+                                    $('#tweeter').find('tbody').append('<tr><td id="neutral"><strong>' + item.name + '</strong><p>' + item.text + '<p></td></tr>');
                                 }
-    
+
                             });
 
 
@@ -273,7 +276,7 @@
                             if(typeof happy_heatmap !== 'undefined' ){
                                 happy_heatmap.setMap(null);
                             }
-                            
+
                             if(typeof neutral_heatmap !== 'undefined' ){
                                 neutral_heatmap.setMap(null);
                             }
@@ -282,7 +285,7 @@
                             $("button#sadness").css("background-color", "#FFFFFF");
                             $("button#neutral").css("background-color", "#FFFFFF");
                             $("button#happy").css("background-color", "#FFFFFF");
-                            
+
                             sad_heatmap = new google.maps.visualization.HeatmapLayer({
                                 data: sad_array,
                                 map: map,
@@ -298,7 +301,7 @@
                                 gradient: happy_gradient,
                                 opacity: .5
                             });
-                            
+
                             neutral_heatmap = new google.maps.visualization.HeatmapLayer({
                                 data: neutral_array,
                                 map: map,
@@ -329,9 +332,9 @@
                     $("button#sadness").css("background-color", "#FFFFFF");
                     $("button#all").css("background-color", "#FFFFFF");
                     $("button#neutral").css("background-color", "#FFFFFF");
-                    $("li#happy").show();
-                    $("li#neutral").hide();
-                    $("li#sad").hide();
+                    $("td#happy").show();
+                    $("td#neutral").hide();
+                    $("td#sad").hide();
                 });
                 $("button#sadness").click(function() {
                     if(typeof sad_heatmap !== 'undefined' ){
@@ -347,9 +350,9 @@
                     $("button#happy").css("background-color", "#FFFFFF");
                     $("button#all").css("background-color", "#FFFFFF");
                     $("button#neutral").css("background-color", "#FFFFFF");
-                    $("li#happy").hide();
-                    $("li#neutral").hide();
-                    $("li#sad").show();
+                    $("td#happy").hide();
+                    $("td#neutral").hide();
+                    $("td#sad").show();
                 });
                 $("button#all").click(function() {
                     if(typeof sad_heatmap !== 'undefined' ){
@@ -365,9 +368,9 @@
                     $("button#sadness").css("background-color", "#FFFFFF");
                     $("button#happy").css("background-color", "#FFFFFF");
                     $("button#neutral").css("background-color", "#FFFFFF");
-                    $("li#neutral").show();
-                    $("li#happy").show();
-                    $("li#sad").show();
+                    $("td#neutral").show();
+                    $("td#happy").show();
+                    $("td#sad").show();
                 });
                 $("button#neutral").click(function() {
                     if(typeof sad_heatmap !== 'undefined' ){
@@ -383,9 +386,9 @@
                     $("button#sadness").css("background-color", "#FFFFFF");
                     $("button#happy").css("background-color", "#FFFFFF");
                     $("button#all").css("background-color", "#FFFFFF");
-                    $("li#neutral").show();
-                    $("li#happy").hide();
-                    $("li#sad").hide();
+                    $("td#neutral").show();
+                    $("td#happy").hide();
+                    $("td#sad").hide();
                 });
             }
 
