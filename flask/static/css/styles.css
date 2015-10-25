@@ -6,6 +6,10 @@ body {
     font-family: 'Raleway',sans-serif;
 }
 
+p{
+    margin: 5px;
+}
+
 #map {
     height:600px;
     width: 100%;

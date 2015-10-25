@@ -54,6 +54,7 @@
                 <p>APIs, APIs, and more APIs</p>
                 <form class="form-inline">
                     <select class="form-control" id='ideas'>
+                        <option>Choose!</option>
                         <option>Star Wars</option>
                         <option>Obama</option>
                         <option>Trump</option>
@@ -140,6 +141,7 @@
 
                     var $value = $('#ideas option:selected').text();
                     $("#tweeter a").attr("href", "https://twitter.com/search?q=" + $value);
+                    $('#tweeter ul').empty();
                     $.ajax({
                         url: $SCRIPT_ROOT + '/_tweet_calcs', //TO DO
                         type: 'GET',
@@ -179,6 +181,9 @@
                                 happy_heatmap.setMap(null);
                             }
 
+                            $("button#both").css("background-color", "#FFA500");
+                            $("button#sadness").css("background-color", "#FFFFFF");
+                            $("button#happy").css("background-color", "#FFFFFF");
                             
                             sad_heatmap = new google.maps.visualization.HeatmapLayer({
                                 data: sad_array,
@@ -211,6 +216,9 @@
                     if(typeof happy_heatmap !== 'undefined' ){
                         happy_heatmap.setMap(map);
                     }
+                    $(this).css("background-color", "#FFF000");
+                    $("button#sadness").css("background-color", "#FFFFFF");
+                    $("button#both").css("background-color", "#FFFFFF");
                 });
                 $("button#sadness").click(function() {
                     if(typeof sad_heatmap !== 'undefined' ){
@@ -219,6 +227,9 @@
                     if(typeof happy_heatmap !== 'undefined' ){
                         happy_heatmap.setMap(null);
                     }
+                    $(this).css("background-color", "#FF0000");
+                    $("button#happy").css("background-color", "#FFFFFF");
+                    $("button#both").css("background-color", "#FFFFFF");
                 });
                 $("button#both").click(function() {
                     if(typeof sad_heatmap !== 'undefined' ){
@@ -227,6 +238,9 @@
                     if(typeof happy_heatmap !== 'undefined' ){
                         happy_heatmap.setMap(map);
                     }
+                    $(this).css("background-color", "#FFA500");
+                    $("button#sadness").css("background-color", "#FFFFFF");
+                    $("button#happy").css("background-color", "#FFFFFF");
                 });
             }
 
