@@ -75,15 +75,11 @@ def munging():
     for r in res:
         a = {"loc": r["_source"]["location"]}
         loc = a["loc"]
-        if (loc != ''):
+        if loc:
             query.append(loc)
     index = randint(0, size - 6)
     result = []
-    result[0] = query[index];
-    result[1] = query[index + 1];
-    result[2] = query[index + 2];
-    result[3] = query[index + 3];
-    result[4] = query[index + 4];
+    result = query[index:index+5];
     return jsonify({"result": result})
 
 #############

@@ -150,6 +150,29 @@
 
                 $("select#ideas").change(function() {
                     
+                    $.ajax({
+                        url: $SCRIPT_ROOT + '/munging',
+                        type: 'GET',
+                        dataType: 'json',
+                        data: {
+                            'query' : $value
+                        },
+                        success: function(json) {
+                            console.log(json);
+                            if not json.result:
+                                $("#topFive").append("<p>Satan's Asshole</p>");
+                                $("#topFive").append("<p>Satan's Butthole</p>");
+                                $("#topFive").append("<p>Satan's Pooper</p>");
+                                $("#topFive").append("<p>Satan's Bumbum</p>");
+                                $("#topFive").append("<p>Satan's Rump</p>");
+                            else:
+                                $("#topFive").append("<p>"+json.result[0]+"</p>");
+                                $("#topFive").append("<p>"+json.result[1]+"</p>");
+                                $("#topFive").append("<p>"+json.result[2]+"</p>");
+                                $("#topFive").append("<p>"+json.result[3]+"</p>");
+                                $("#topFive").append("<p>"+json.result[4]+"</p>");
+                        }
+                    });
 
                     var $value = $('#ideas option:selected').text();
                     $("#tweeter a").attr("href", "https://twitter.com/search?q=" + $value);
