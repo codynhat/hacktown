@@ -96,7 +96,9 @@ h2{
     margin: 10px;
 }
 
-
+td{
+  width: 33%;
+}
 
 
 .button {
