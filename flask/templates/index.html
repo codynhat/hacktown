@@ -74,7 +74,7 @@
                 <div class ="col-md-4 col-md-push-8">
                     <div id="tweeter">
                         <ul>
-                            
+
                         </ul>
                     </div>
 =                </div>
@@ -88,6 +88,7 @@
         <div class="container">
 
         <h4 class="text-center">Holla</h4>
+        <p class="text-center">Copyright © two days of straight coding one October weekend in 2015</p>
 
         </div>
     </footer>
@@ -168,9 +169,9 @@
                                 }
                                 $('#tweeter ul').append('<li><h2>' + item.name + '</h2><p>' + item.text + '<p></li>');
                             });
-                            
-                            
-                        
+
+
+
                             if(typeof sad_heatmap !== 'undefined' ){
                                 sad_heatmap.setMap(null);
                             }
@@ -179,7 +180,7 @@
                                 happy_heatmap.setMap(null);
                             }
 
-                            
+
                             sad_heatmap = new google.maps.visualization.HeatmapLayer({
                                 data: sad_array,
                                 map: map,
@@ -187,7 +188,7 @@
                                 gradient: sad_gradient,
                                 opacity: .5
                             });
-                            
+
                             happy_heatmap = new google.maps.visualization.HeatmapLayer({
                                 data: happy_array,
                                 map: map,
@@ -231,11 +232,11 @@
             }
 
 
-            
-            
 
 
-    
+
+
+
     </script>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=visualization&callback=initMap"></script>
