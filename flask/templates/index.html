@@ -61,6 +61,13 @@
                         <option>Adele</option>
                         <option>Concert</option>
                         <option>Marijuana</option>
+                        <option>Police</option>
+                        <option>Sanders</option>
+                        <option>Twerk</option>
+                        <option>Kardashian</option>
+                        <option>Comcast</option>
+                        <option>School</option>
+                        <option>Clinton</option>
                     </select>
                     <div class='btn-group'>
                         <button id="all" type="button" class="btn btn-default">All</button>
@@ -91,7 +98,7 @@
     <br>
     <br>
     <div class="panel">
-        <h3>Location Samples</h3>
+        <h3>Locations That We Couldn't Parse</h3>
         <div class = "row" id='topFive'></div>
     </div>
     <footer>
@@ -195,7 +202,6 @@
                             'query' : $value
                         },
                         success: function(json) {
-                            console.log(json);
                             $("#topFive").empty();
                             if(json.result.length == 0){
                                 $("#topFive").append("<p>Satan's Asshole</p>");
@@ -227,12 +233,10 @@
                             'query': $value
                         },
                         success: function(json) {
-                            console.log(json);
                             var happy_array = [];
                             var sad_array = [];
                             var neutral_array = [];
                             $.each(json.result, function(i, item) {
-                                console.log(item.name);
                                 var coordinates = new google.maps.LatLng(parseInt(item.lat), parseInt(item.lng));
                                 if (item.wgt < 0) {
                                     var weightedLoc = {
@@ -297,7 +301,7 @@
                             neutral_heatmap = new google.maps.visualization.HeatmapLayer({
                                 data: neutral_array,
                                 map: map,
-                                radius: 80,
+                                radius: 70,
                                 gradient: neutral_gradient,
                                 opacity: .5
                             });
