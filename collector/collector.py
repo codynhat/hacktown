@@ -35,19 +35,9 @@ def main():
     possentiment = 0
     negsentiment = 0
     sentcount = 0
+    locations = []
+    locations_needed = []
     for tweet in valueswecareabout:
-        lat = None
-        lng = None
-        if tweet[2] != None:
-            lat = tweet[2]["coordinates"][0]
-            lng = tweet[2]["coordinates"][1]
-        if lat == None or lng == None:
-            latLng = getLatLng(tweet[1])
-            if latLng == None:
-                i += 1
-                continue
-            lat = latLng["lat"]
-            lng = latLng["lng"]
         score = getSentiment(tweet[0])
         if score > 0.01:
             possentiment += score
@@ -55,10 +45,38 @@ def main():
         elif score < -0.01:
             negsentiment += score
             sentcount += 1
+
+        lat = None
+        lng = None
+        if tweet[2] != None:
+            lat = tweet[2]["coordinates"][0]
+            lng = tweet[2]["coordinates"][1]
+        if lat == None or lng == None:
+            if len(tweet[1]) > 0:
+              locations.append(tweet[1])
+              locations_needed.append((i,score))
+            i += 1
+            continue
         # print score
         es.index(index="index", doc_type=term, body={
                  "lat": lat, "lng": lng, "score": score}, id=i)
         i += 1
+
+    c = 0
+    while(c < len(locations)):
+      latLngs = getLatLng(locations[c:c+100])
+      for a in range(len(latLngs)):
+        latLng = latLngs[a]
+        tweet = locations_needed[a]
+        if latLng == None:
+            continue
+        lat = latLng["lat"]
+        lng = latLng["lng"]
+        score = tweet[1]
+        es.index(index="index", doc_type=term, body={
+                   "lat": lat, "lng": lng, "score": score}, id=tweet[0])
+        c += 100
+
     print sentcount, possentiment, negsentiment
 
 
@@ -85,13 +103,12 @@ def getSentiment(tweet):
     return value.sentiment.polarity
 
 
-def getLatLng(location):
-    if len(location) == 0:
+def getLatLng(locations):
+    if len(locations) == 0:
         return None
     payload = []
     for location in locations:
-        payload.append({'location': location})
-
+        payload.append(('location',location))
     r = requests.get('http://www.mapquestapi.com/geocoding/v1/batch?', data={
         'key': '7N1MeC0H0uFcbyzovGkG8SPFu5SdPUjU',
         'inFormat': 'json',
@@ -101,10 +118,12 @@ def getLatLng(location):
     }, params=payload)
     re = r.json()
     coordinates = []
-    for coord in re:
-        if coord['results'][0]['locations'][0]["geocodeQuality"] != "COUNTRY":
-            latLng = coord['results'][0]['locations'][0]['latLng']
+    for coord in re["results"]:
+        if coord['locations'][0]["geocodeQuality"] != "COUNTRY":
+            latLng = coord['locations'][0]['latLng']
             coordinates.append(latLng)
+        else:
+            coordinates.append(None)
     return coordinates
 
 if __name__ == '__main__':
