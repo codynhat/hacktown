@@ -145,7 +145,7 @@
                 $("select#ideas").change(function() {
                     
                     $.ajax({
-                        url: $SCRIPT_ROOT + '/frequency',
+                        url: $SCRIPT_ROOT + '/munging',
                         type: 'GET',
                         dataType: 'json',
                         success: function(json){
