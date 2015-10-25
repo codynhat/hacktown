@@ -30,11 +30,12 @@ def main():
             break
         query = getTweets(api, term, lastid - 1)
         lastid = logTweets(query, valueswecareabout)
-
-    i = 0
+    
+    allids = set()
     possentiment = 0
     negsentiment = 0
     sentcount = 0
+    goodlocs=0
     locations = []
     locations_needed = []
     for tweet in valueswecareabout:
@@ -53,31 +54,41 @@ def main():
             lng = tweet[2]["coordinates"][1]
         if lat == None or lng == None:
             if len(tweet[1]) > 0:
-              locations.append(tweet[1])
-              locations_needed.append((i,score))
-            i += 1
+                #print tweet[1].encode('utf-8')
+                locations.append(tweet[1])
+                locations_needed.append((tweet[5],score))
             continue
         # print score
+        goodlocs+=1
+        if tweet[5] in allids:
+            print "WOOOWOWWO"
+        else:
+            allids.add(tweet[5])
         es.index(index="index", doc_type=term, body={
-                 "lat": lat, "lng": lng, "score": score}, id=i)
-        i += 1
+                 "lat": lat, "lng": lng, "score": score}, id=tweet[5])
 
     c = 0
     while(c < len(locations)):
-      latLngs = getLatLng(locations[c:c+100])
-      for a in range(len(latLngs)):
-        latLng = latLngs[a]
-        tweet = locations_needed[a]
-        if latLng == None:
-            continue
-        lat = latLng["lat"]
-        lng = latLng["lng"]
-        score = tweet[1]
-        es.index(index="index", doc_type=term, body={
+        latLngs = getLatLng(locations[c:c+100])
+        for a in range(len(latLngs)):
+            latLng = latLngs[a]
+            tweet = locations_needed[c+a]
+            if latLng == None:
+                continue
+            goodlocs+=1
+            lat = latLng["lat"]
+            lng = latLng["lng"]
+            score = tweet[1]
+            print tweet[0]
+            if tweet[0] in allids:
+                print "WWOOWOWOWWO"
+            else:
+                allids.add(tweet[0])
+            es.index(index="index", doc_type=term, body={
                    "lat": lat, "lng": lng, "score": score}, id=tweet[0])
         c += 100
 
-    print sentcount, possentiment, negsentiment
+    print len(valueswecareabout), goodlocs, sentcount, possentiment, negsentiment
 
 
 def getTweets(api, searchterm, last_id):
@@ -94,7 +105,7 @@ def logTweets(query, valueswecareabout):
         return -1
     for status in query:
         valueswecareabout.append(
-            (status.text, status.user.location, status.coordinates, status.geo, status.place))
+            (status.text, status.user.location, status.coordinates, status.geo, status.place, status.id))
     return query[-1].id
 
 
@@ -116,6 +127,8 @@ def getLatLng(locations):
         'maxResults': 1,
         'thumbMaps': 'false',
     }, params=payload)
+    print dir(r)
+    print r.status_code
     re = r.json()
     coordinates = []
     for coord in re["results"]:
@@ -124,6 +137,8 @@ def getLatLng(locations):
             coordinates.append(latLng)
         else:
             coordinates.append(None)
+            
+    print(len(coordinates))
     return coordinates
 
 if __name__ == '__main__':
