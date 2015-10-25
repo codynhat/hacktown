@@ -13,6 +13,8 @@ from flask import jsonify  # For AJAX transactions
 import json
 import logging
 from elasticsearch import Elasticsearch
+from random import randint
+
 
 ###
 # Globals
@@ -62,9 +64,23 @@ def calc_tweets():
         for r in res:
             a = {"lat": r["_source"]["lat"], "lng": r["_source"]["lng"], "wgt": r["_source"]["score"], "name": r["_source"]["name"], "text": r["_source"]["text"]}
             result.append(a)
-        c += 1000
+            c += 1000
     return jsonify({"result": result})
 
+@app.route("/munging")
+def munging():
+    size = 100
+    res = es.search(index="index", body={"query": {"match_all": {}}}, doc_type="bad", size=size)["hits"]["hits"]
+    query = []
+    for r in res:
+        a = {"loc": r["_source"]["location"]}
+        loc = a["loc"]
+        if loc:
+            query.append(loc)
+    index = randint(0, size - 6)
+    result = []
+    result = query[index:index+5];
+    return jsonify({"result": result})
 
 #############
 

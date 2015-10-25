@@ -47,11 +47,11 @@
         </div>
     </nav>
 
-    <div class="container-fluid">
+    <div class="container-fluid" id="banner">
         <div class="row">
             <div class="jumbotron">
-                <h1>What the Hack is Going On in the United States</h1>
-                <p>APIs, APIs, and more APIs</p>
+                <h1>Twitter Topic Topography</h1>
+                <p>A Twitter data visualization using the Google Maps API, Twitter API, MapQuest API, Sentiment API, Elastic Search, and a custom API</p>
                 <form class="form-inline">
                     <select class="form-control" id='ideas'>
                         <option>Choose!</option>
@@ -61,9 +61,10 @@
                         <option>Adele</option>
                     </select>
                     <div class='btn-group'>
-                        <button id="happy" type="button" class="btn btn-default">Happiness</button>
-                        <button id="sadness" type="button" class="btn btn-default">Sadness</button>
                         <button id="both" type="button" class="btn btn-default">Both</button>
+                        <button id="happy" type="button" class="btn btn-default">Positive</button>
+                        <button id="neutral" type="button" class="btn btn-default">Neutral</button>
+                        <button id="sadness" type="button" class="btn btn-default">Negative</button>
                     </div>
                 </form>
             </div>
@@ -71,25 +72,24 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
-                <div class ="col-md-4 col-md-push-8">
+            <div class="col-md-12" style="padding:0">
+                <div class ="col-md-4 col-md-push-8" style="padding:0">
                     <div id="tweeter">
                         <ul>
 
                         </ul>
                     </div>
-=                </div>
-                <div class="col-md-8 col-md-pull-4">
-                    <div id='map'></div>f
+               </div>
+                <div class="col-md-8 col-md-pull-4" style="padding:0">
+                    <div id='map'></div>
                 </div>
             </div>
         </div>
     </div>
     <div class="container-fluid">
-        <h3 class="text-center">Top 5</h3>
+        <h3 class="text-center">5 Bad Locations</h3>
         <div id='topFive'></div>
     </div>
-
     <footer>
         <div class="container">
 
@@ -103,6 +103,11 @@
             /*global google*/
             var map, sad_heatmap, happy_heatmap;
             $SCRIPT_ROOT = {{request.script_root | tojson | safe}};
+            
+            $(function() {
+            var temp="Choose!"; 
+            $("#ideas").val(temp);
+            });
 
             function initMap() {
                 "use strict";
@@ -144,6 +149,32 @@
                 ]
 
                 $("select#ideas").change(function() {
+                    
+                    $.ajax({
+                        url: $SCRIPT_ROOT + '/munging',
+                        type: 'GET',
+                        dataType: 'json',
+                        data: {
+                            'query' : $value
+                        },
+                        success: function(json) {
+                            console.log(json);
+                            $("#topFive").empty();
+                            if(json.result.length == 0){
+                                $("#topFive").append("<p>Satan's Asshole</p>");
+                                $("#topFive").append("<p>My Bed</p>");
+                                $("#topFive").append("<p>UR MAm;s HawSe</p>");
+                                $("#topFive").append("<p>The Moon LOL</p>");
+                                $("#topFive").append("<p>I'm famous, screw off</p>");
+                            }else{
+                                $("#topFive").append("<p>"+json.result[0]+"</p>");
+                                $("#topFive").append("<p>"+json.result[1]+"</p>");
+                                $("#topFive").append("<p>"+json.result[2]+"</p>");
+                                $("#topFive").append("<p>"+json.result[3]+"</p>");
+                                $("#topFive").append("<p>"+json.result[4]+"</p>");
+                            }
+                        }
+                    });
 
                     var $value = $('#ideas option:selected').text();
                     $("#tweeter a").attr("href", "https://twitter.com/search?q=" + $value);
@@ -160,6 +191,7 @@
                             var happy_array = [];
                             var sad_array = [];
                             $.each(json.result, function(i, item) {
+                                console.log(item.name);
                                 var coordinates = new google.maps.LatLng(parseInt(item.lat), parseInt(item.lng));
                                 if (item.wgt < 0) {
                                     var weightedLoc = {
@@ -167,14 +199,16 @@
                                         weight: item.wgt * -100
                                     };
                                     sad_array.push(weightedLoc);
+                                    $('#tweeter ul').append('<li id="sad"><h2>' + item.name + '</h2><p>' + item.text + '<p></li>');
                                 } else if (item.wgt > 0) {
                                     var weightedLoc = {
                                         location: coordinates,
                                         weight: item.wgt * 100
                                     };
                                     happy_array.push(weightedLoc);
+                                    $('#tweeter ul').append('<li id="happy"><h2>' + item.name + '</h2><p>' + item.text + '<p></li>');
                                 }
-                                $('#tweeter ul').append('<li><h2>' + item.name + '</h2><p>' + item.text + '<p></li>');
+                                
                             });
 
 
@@ -225,6 +259,8 @@
                     $(this).css("background-color", "#FFF000");
                     $("button#sadness").css("background-color", "#FFFFFF");
                     $("button#both").css("background-color", "#FFFFFF");
+                    $("li#happy").show();
+                    $("li#sad").hide();
                 });
                 $("button#sadness").click(function() {
                     if(typeof sad_heatmap !== 'undefined' ){
@@ -236,6 +272,8 @@
                     $(this).css("background-color", "#FF0000");
                     $("button#happy").css("background-color", "#FFFFFF");
                     $("button#both").css("background-color", "#FFFFFF");
+                    $("li#happy").hide();
+                    $("li#sad").show();
                 });
                 $("button#both").click(function() {
                     if(typeof sad_heatmap !== 'undefined' ){
@@ -247,6 +285,8 @@
                     $(this).css("background-color", "#FFA500");
                     $("button#sadness").css("background-color", "#FFFFFF");
                     $("button#happy").css("background-color", "#FFFFFF");
+                    $("li#happy").show();
+                    $("li#sad").show();
                 });
             }
 
