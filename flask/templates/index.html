@@ -51,7 +51,7 @@
         <div class="row">
             <div class="jumbotron">
                 <h1>Twitter Topic Topography</h1>
-                <p>A Twitter data visualization using the Google Maps API, Twitter API, MapQuest API, Sentiment API, and a custom API</p>
+                <p>A Twitter data visualization using the Google Maps API, Twitter API, MapQuest API, Sentiment API, Elastic Search, and a custom API</p>
                 <form class="form-inline">
                     <select class="form-control" id='ideas'>
                         <option>Choose!</option>
@@ -61,9 +61,10 @@
                         <option>Adele</option>
                     </select>
                     <div class='btn-group'>
-                        <button id="happy" type="button" class="btn btn-default">Happiness</button>
-                        <button id="sadness" type="button" class="btn btn-default">Sadness</button>
                         <button id="both" type="button" class="btn btn-default">Both</button>
+                        <button id="happy" type="button" class="btn btn-default">Positive</button>
+                        <button id="neutral" type="button" class="btn btn-default">Neutral</button>
+                        <button id="sadness" type="button" class="btn btn-default">Negative</button>
                     </div>
                 </form>
             </div>
@@ -78,7 +79,7 @@
 
                         </ul>
                     </div>
-=                </div>
+               </div>
                 <div class="col-md-8 col-md-pull-4">
                     <div id='map'></div>f
                 </div>
@@ -144,18 +145,6 @@
 
                 $("select#ideas").change(function() {
                     
-                    $.ajax({
-                        url: $SCRIPT_ROOT + '/munging',
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function(json){
-                            $('#topFive').html(json)
-                        },
-                        error: function(xhr, desc, err) {
-                            console.log(xhr);
-                            console.log("Details: " + desc + "\nError: " + err);
-                        }
-                    });
 
                     var $value = $('#ideas option:selected').text();
                     $("#tweeter a").attr("href", "https://twitter.com/search?q=" + $value);
@@ -172,6 +161,7 @@
                             var happy_array = [];
                             var sad_array = [];
                             $.each(json.result, function(i, item) {
+                                console.log(item.name);
                                 var coordinates = new google.maps.LatLng(parseInt(item.lat), parseInt(item.lng));
                                 if (item.wgt < 0) {
                                     var weightedLoc = {
@@ -179,14 +169,16 @@
                                         weight: item.wgt * -100
                                     };
                                     sad_array.push(weightedLoc);
+                                    $('#tweeter ul').append('<li id="sad"><h2>' + item.name + '</h2><p>' + item.text + '<p></li>');
                                 } else if (item.wgt > 0) {
                                     var weightedLoc = {
                                         location: coordinates,
                                         weight: item.wgt * 100
                                     };
                                     happy_array.push(weightedLoc);
+                                    $('#tweeter ul').append('<li id="happy"><h2>' + item.name + '</h2><p>' + item.text + '<p></li>');
                                 }
-                                $('#tweeter ul').append('<li><h2>' + item.name + '</h2><p>' + item.text + '<p></li>');
+                                
                             });
 
 
@@ -237,6 +229,8 @@
                     $(this).css("background-color", "#FFF000");
                     $("button#sadness").css("background-color", "#FFFFFF");
                     $("button#both").css("background-color", "#FFFFFF");
+                    $("li#happy").show();
+                    $("li#sad").hide();
                 });
                 $("button#sadness").click(function() {
                     if(typeof sad_heatmap !== 'undefined' ){
@@ -248,6 +242,8 @@
                     $(this).css("background-color", "#FF0000");
                     $("button#happy").css("background-color", "#FFFFFF");
                     $("button#both").css("background-color", "#FFFFFF");
+                    $("li#happy").hide();
+                    $("li#sad").show();
                 });
                 $("button#both").click(function() {
                     if(typeof sad_heatmap !== 'undefined' ){
@@ -259,6 +255,8 @@
                     $(this).css("background-color", "#FFA500");
                     $("button#sadness").css("background-color", "#FFFFFF");
                     $("button#happy").css("background-color", "#FFFFFF");
+                    $("li#happy").show();
+                    $("li#sad").show();
                 });
             }
 

@@ -49,15 +49,15 @@ footer {
 }
 ul{
   list-style:none;
-  max-height:600px;
+  max-height:598px;
   margin:0;
   overflow:auto;
   padding:0;
   text-indent:10px;
 }
 li{
-  line-height:25px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    line-height:25px;
 }
-li:nth-child(even){
-  background:#ccc;
-}
+
