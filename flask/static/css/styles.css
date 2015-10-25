@@ -63,3 +63,8 @@ li{
     line-height:25px;
 }
 
+.container-fluid{
+    border-radius: 0px;
+}
+
+
