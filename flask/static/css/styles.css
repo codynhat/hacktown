@@ -12,6 +12,18 @@ footer {
     margin: 40px 0px;
 }
 
+#bad{
+    text-align: center;
+    padding-bottom: 25px;
+}
+
+h3{
+    text-align: center;
+}
+#topFive{
+    margin: 0;
+}
+
 #map {
     height:600px;
     width: 100%;
@@ -55,12 +67,12 @@ ul{
   margin:0;
   overflow:auto;
   padding:0;
-  text-indent:10px;
 }
 li{
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     line-height:25px;
+    width: 100%;
 }
 
 .container-fluid{
@@ -69,11 +81,22 @@ li{
 
 .jumbotron{
     border-radius: 0px !important;
+    margin-bottom: 20px !important;
 }
 
 .navbar{
     border-radius: 0px;
 }
+
+p{
+    word-wrap: break-word;
+    margin: 10px;
+}
+h2{
+    margin: 10px;
+}
+
+
 
 
 .button {
