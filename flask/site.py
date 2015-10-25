@@ -54,7 +54,7 @@ def page_not_found(error):
 def calc_tweets():
     results = request.args.get('query', 'hi',type=str)
     print(results)
-    result = {'lat':51.5033630,'lng':-0.1276250,'wgt':1}
+    result = {'result': [{'lat': 40.7127,'lng': 74.0059,'wgt':1},]}
     return jsonify(result=result)
 
 
