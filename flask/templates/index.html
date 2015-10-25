@@ -80,7 +80,7 @@
             "use strict";
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 5,
-                center: {lat: 38.8833, lng: -102.9833},
+                center: {lat: 38.8833, lng: -95.9833},
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 disableDefaultUI: true,
                 scrollwheel: false,
@@ -93,7 +93,7 @@
             });
             var happy_gradient = [
                 'rgba(255, 255, 255, 0)', //Transparent
-                'rgba(255, 255, 180, 0.5)',
+                'rgba(255, 255, 180, 0.6)',
                 'rgba(255, 255, 100, 0.8)',
                 'rgba(255, 255, 40, 1)',
                 'rgba(255, 255, 20, 1)',
@@ -104,7 +104,7 @@
             
             var sad_gradient = [
                 'rgba(255, 255, 255, 0)',
-                'rgba(255, 200, 200, 0.5)',
+                'rgba(255, 200, 200, 0.6)',
                 'rgba(255, 160, 100, 0.8)',
                 'rgba(255, 120, 60, 1)',
                 'rgba(255, 80, 40, 1)',
@@ -116,7 +116,6 @@
                 
                 var $value = $('#ideas option:selected').text();
                 $("#tweeter a").attr("href", "https://twitter.com/search?q=" + $value);
-                twttr.widgets.load();
                 $.ajax({
                     url: $SCRIPT_ROOT + '/_tweet_calcs', //TO DO
                     type: 'GET',
@@ -141,17 +140,15 @@
                         var sad_heatmap = new google.maps.visualization.HeatmapLayer({
                             data: sad_array,
                             map: map,
-                            radius: 90,
-                            gradient: sad_gradient,
-                          //opacity: 1
+                            radius: 100,
+                            gradient: sad_gradient
                         });                      
 
                         var happy_heatmap = new google.maps.visualization.HeatmapLayer({
                             data: happy_array,
                             map: map,
-                            radius: 90,
-                            gradient: happy_gradient,
-                            //opacity: .6
+                            radius: 100,
+                            gradient: happy_gradient
                         });
                         
                     },
