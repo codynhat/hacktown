@@ -8,7 +8,7 @@ def deleteCommonWords(badLocationData):
 	locations = []
 
 	for line in badLocationData:
-		print line
+		#print line
 		a = filter(lambda word: not word in theStopwordsDic,line)
 		if (a != ""):
 			locations.append(a)
@@ -24,7 +24,8 @@ def main():
 		loc = a["loc"]
 		result.append(loc)
 	s = deleteCommonWords(result)
-	frequency.doTheTuples(s)
+	re = frequency.doTheTuples(s)
+	print re
 
 if __name__ == "__main__":
     main()
