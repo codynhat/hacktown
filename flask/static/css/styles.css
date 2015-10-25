@@ -35,3 +35,24 @@ body {
     top: 10px;
     z-index: 5;
 }
+
+#tweeter{
+  border:1px solid #000;
+  font-family:arial;
+  height:600px;
+  width:100%;
+}
+ul{
+  list-style:none;
+  max-height:600px;
+  margin:0;
+  overflow:auto;
+  padding:0;
+  text-indent:10px;
+}
+li{
+  line-height:25px;
+}
+li:nth-child(even){
+  background:#ccc;
+}
