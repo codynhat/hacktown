@@ -61,8 +61,6 @@
                         <option>Trump</option>
                         <option>Adele</option>
                     </select>
-                    <button id="submit" type="button" class="btn btn-default">Submit</button>
-
                     <div class='btn-group'>
                         <button id="happy" type="button" class="btn btn-default">Happiness</button>
                         <button id="sadness" type="button" class="btn btn-default">Sadness</button>
@@ -107,11 +105,7 @@
         <script type="text/javascript">
             /*global google*/
             var map, sad_heatmap, happy_heatmap;
-            $SCRIPT_ROOT = {
-                {
-                    request.script_root | tojson | safe
-                }
-            };
+            $SCRIPT_ROOT = {{request.script_root | tojson | safe}};
 
             function initMap() {
                 "use strict";
@@ -152,7 +146,7 @@
                     'rgba(255, 0, 0, 1)'
                 ]
 
-                $("button#submit").click(function() {
+                $("select#ideas").change(function() {
 
                     var $value = $('#ideas option:selected').text();
                     $("#tweeter a").attr("href", "https://twitter.com/search?q=" + $value);
