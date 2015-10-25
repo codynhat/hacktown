@@ -3,7 +3,6 @@ from elasticsearch import Elasticsearch
 import frequency
 
 def deleteCommonWords(badLocationData):
-
 	theStopwordsDic = set(stopwords.words('english'))
 	locations = []
 
