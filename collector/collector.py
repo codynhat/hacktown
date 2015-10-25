@@ -1,6 +1,7 @@
 import twitter, json, StringIO
 from elasticsearch import Elasticsearch
 from textblob import TextBlob
+import sys
 import requests
 
 es = Elasticsearch()
@@ -30,11 +31,11 @@ def main():
 def getTweets(api, searchterm, geo):
     query = api.GetSearch(term = searchterm, count = 100, geocode = geo)
     return query
-
+        
 def getSentiment(tweet):
     value = TextBlob(tweet)
     return value.sentiment.polarity
-
+        
 def getLatLng(location):
     print location
     payload = {'location': location}
