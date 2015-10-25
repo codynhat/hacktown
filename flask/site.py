@@ -55,7 +55,7 @@ def page_not_found(error):
 def calc_tweets():
     query = request.args['query']
     query = query.lower()
-    res = es.search(index="index", body={"query": {"match_all": {}}}, doc_type=query, size=100)["hits"]["hits"]
+    res = es.search(index="index", body={"query": {"match_all": {}}}, doc_type=query, size=1000)["hits"]["hits"]
     result = []
     for r in res:
         a = {"lat": r["_source"]["lat"], "lng": r["_source"]["lng"], "wgt": r["_source"]["score"]}
