@@ -21,10 +21,13 @@
     <link rel="stylesheet" href="static/css/normalize.css">
     <link rel="stylesheet" href="static/css/skeleton.css">
     <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="static/css/bootstrap.min.js">
+
     <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script type="text/javascript" src="static/js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="static/js/app.js"></script>
+    	<script type="text/javascript" src="js/bootstrap.js"></script>
 
 </head>
 
@@ -45,7 +48,6 @@
                     <h1>Title of Page</h1>
                     <h4>Lane8</h4>
                     <p>APIs, APIs, and more APIs</p>
-                    <p>My fave numbers: {% for n in range(1,10) %}{{n}} " " {% endfor %}</p>
                 </div>
             </div>
 
@@ -61,10 +63,12 @@
                         <button id="submit" type="button" class="btn btn-default" onclick="getPoints()">Submit</button>
                         </div>
                     </div>
-                </div>
+    
     <div id="map"></div>
+    
+    
     <div id="tweeter">
-    <a class="twitter-timeline" href="https://twitter.com/search?q=corgi" data-widget-id="658116944541843456"></a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    
     </div>
 
     <script type="text/javascript">
