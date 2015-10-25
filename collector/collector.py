@@ -20,13 +20,14 @@ def main():
 #                      consumer_secret='A7IPWnxsfTfTccnuyF9TXPXEBwpC6WyEVwkNseJXxv4SVqhncd',
 #                      access_token_key='1939224967-lZqH7LpKSs775MCNK2ynZlJ0meUIcDt9QiM5KAt',
 #                      access_token_secret='bgelSzudLaRrKaQcIHvXOXvNW7QaoNpEiaLmnGAnvYNmt')
-    term = "adele"
+    term = "adele" # input parsing
     numberofqueries = 2
     if len(sys.argv) > 1:
         term = sys.argv[1]
         if len(sys.argv) == 3:
             numberofqueries = int(sys.argv[2])
 
+    #initialize values
     valueswecareabout = []
     possentiment = 0
     negsentiment = 0
