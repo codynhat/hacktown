@@ -76,12 +76,14 @@
                         <button id="sadness" type="button" class="btn btn-default">Negative</button>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12" style="padding:0">
+
                 <div class ="col-md-4 col-md-push-8" style="padding:0">
 <div class="tweet">
                         <table class = "table" id="tweeter">
@@ -94,6 +96,7 @@
                 <div class="col-md-8 col-md-pull-4" style="padding:0">
                     <div id='map'></div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -220,11 +223,11 @@
                                 $("#topFive").append("<p>I'm famous, screw off</p>");
                             }else{
                                 $("#topFive").append("<div id='bad' class='col-md-1'></div>");
-                                $("#topFive").append("<div id='bad' class='col-md-2'><strong>" + json.result[0] + "</strong></div>");
-                                $("#topFive").append("<div id='bad' class='col-md-2'><strong>" + json.result[1] + "</strong></div>");
-                                $("#topFive").append("<div id='bad' class='col-md-2'><strong>" + json.result[2] + "</strong></div>");
-                                $("#topFive").append("<div id='bad' class='col-md-2'><strong>" + json.result[3] + "</strong><strong></div>");
-                                $("#topFive").append("<div id='bad' class='col-md-2'><strong>" + json.result[4] + "</strong></div>");
+                                $("#topFive").append("<div id='bad' class='col-md-2'><h4><strong>" + json.result[0] + "</strong></h4></div>");
+                                $("#topFive").append("<div id='bad' class='col-md-2'><h4><strong>" + json.result[1] + "</strong></h4></div>");
+                                $("#topFive").append("<div id='bad' class='col-md-2'><h4><strong>" + json.result[2] + "</strong></h4></div>");
+                                $("#topFive").append("<div id='bad' class='col-md-2'><h4><strong>" + json.result[3] + "</strong></h4></div>");
+                                $("#topFive").append("<div id='bad' class='col-md-2'><h4><strong>" + json.result[4] + "</strong></h4></div>");
                                 $("#topFive").append("<div id='bad' class='col-md-1'></div>");
                             }
                         }

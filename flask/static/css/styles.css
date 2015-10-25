@@ -14,8 +14,17 @@ footer {
 #foot {
     background-color: #eee;
 }
-table#tweeter strong{
+table#tweeter strong {
     text-transform: uppercase;
+}
+td#happy strong {
+    color: #f1c40f;
+}
+td#sad strong{
+    color: #d9534f;
+}
+td#neutral strong {
+    color: #5bc0de;
 }
 
 #bad{
@@ -38,8 +47,6 @@ h3{
 }
 #top {
     padding: 10px;
-    margin-top: 5%;
-    margin-bottom:10%;
 }
 
 #floating-panel {
@@ -101,6 +108,8 @@ p{
 }
 h2{
     margin: 10px;
+    word-wrap: break-word;
+
 }
 
 td{
