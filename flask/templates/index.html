@@ -72,15 +72,15 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
-                <div class ="col-md-4 col-md-push-8">
+            <div class="col-md-12" style="padding:0">
+                <div class ="col-md-4 col-md-push-8" style="padding:0">
                     <div id="tweeter">
                         <ul>
 
                         </ul>
                     </div>
                </div>
-                <div class="col-md-8 col-md-pull-4">
+                <div class="col-md-8 col-md-pull-4" style="padding:0">
                     <div id='map'></div>
                 </div>
             </div>
@@ -159,18 +159,20 @@
                         },
                         success: function(json) {
                             console.log(json);
-                            if not json.result:
+                            $("#topFive").empty();
+                            if(json.result.length == 0){
                                 $("#topFive").append("<p>Satan's Asshole</p>");
-                                $("#topFive").append("<p>Satan's Butthole</p>");
-                                $("#topFive").append("<p>Satan's Pooper</p>");
-                                $("#topFive").append("<p>Satan's Bumbum</p>");
-                                $("#topFive").append("<p>Satan's Rump</p>");
-                            else:
+                                $("#topFive").append("<p>My Bed</p>");
+                                $("#topFive").append("<p>UR MAm;s HawSe</p>");
+                                $("#topFive").append("<p>The Moon LOL</p>");
+                                $("#topFive").append("<p>I'm famous, screw off</p>");
+                            }else{
                                 $("#topFive").append("<p>"+json.result[0]+"</p>");
                                 $("#topFive").append("<p>"+json.result[1]+"</p>");
                                 $("#topFive").append("<p>"+json.result[2]+"</p>");
                                 $("#topFive").append("<p>"+json.result[3]+"</p>");
                                 $("#topFive").append("<p>"+json.result[4]+"</p>");
+                            }
                         }
                     });
 
