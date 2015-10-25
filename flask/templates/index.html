@@ -75,7 +75,7 @@
         function initMap() {
             "use strict";
             map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 4,
+                zoom: 5,
                 center: {lat: 38.8833, lng: -102.9833},
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 disableDefaultUI: true,
@@ -87,6 +87,26 @@
                 draggable: false,
                 disableDoubleClickZoom: false
             });
+            var happy_gradient = [
+                'rgba(0, 255, 255, 0)', //Transparent
+                'rgba(255, 0, 80, 1)',
+                'rgba(255, 0, 50, 1)',
+                'rgba(255, 0, 40, 1)',
+                'rgba(255, 0, 30, 1)',
+                'rgba(255, 0, 20, 1)',
+                'rgba(255, 0, 0, 1)',//start
+                
+            ]
+            
+            var sad_gradient = [
+                'rgba(0, 255, 255, 0)',
+                'rgba(0, 100, 255, 1)',
+                'rgba(0, 80, 225, 1)',
+                'rgba(0, 40, 255, 1)',
+                'rgba(0, 20, 255, 1)',
+                'rgba(0, 20, 200, 1)',
+                'rgba(0, 0, 200, 1)',
+            ]
             
             $("button#submit").click(function() {
                 
@@ -102,19 +122,34 @@
                     },
                     success: function(json) {
                         console.log(json);
-                        var array = [];
+                        var happy_array = [];
+                        var sad_array = [];
                         $.each(json.result, function (i, item) {
                             var coordinates = new google.maps.LatLng(parseInt(item.lat), parseInt(item.lng));
-                            var weightedLoc = {location: coordinates, weight: item.wgt + 1.01};
-                            array.push(weightedLoc);
+                            if (item.wgt < 0){
+                                var weightedLoc = {location: coordinates, weight: item.wgt*-1};
+                                sad_array.push(weightedLoc);
+                            }else if(item.wgt>0){
+                                var weightedLoc = {location: coordinates, weight: item.wgt};
+                                happy_array.push(weightedLoc);
+                            }
                         }); 
                                                 
 
-                        var heatmap1 = new google.maps.visualization.HeatmapLayer({
-                            data: array,
+                        var happy_heatmap = new google.maps.visualization.HeatmapLayer({
+                            data: happy_array,
                             map: map,
-                            radius: 60
+                            radius: 80,
+                            gradient: happy_gradient
                         });
+                        var sad_heatmap = new google.maps.visualization.HeatmapLayer({
+                            data: sad_array,
+                            map: map,
+                            radius: 80,
+                            gradient: sad_gradient,
+                            opacity: .6
+                        });
+                        
                     },
                     error: function (xhr, desc, err) {
                         console.log(xhr);
