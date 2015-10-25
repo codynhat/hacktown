@@ -58,7 +58,7 @@
             <input class="form-control" type="text" name="query" placeholder="Type in what you want to search!">
             <select class="form-control" id = 'ideas'>
                 <option>Basketball</option>
-                <option>Oregon</option>
+                <option>Obama</option>
                 <option>Trump</option>
                 <option>Adele</option>
             </select>
@@ -169,19 +169,12 @@
                             happy_heatmap.setMap(null);
                         }
 
-                        sad_heatmap = new google.maps.visualization.HeatmapLayer({
-                            data: sad_array,
-                            map: map,
-                            radius: 60,
-                            gradient: sad_gradient
-                        });
-
-
                         happy_heatmap = new google.maps.visualization.HeatmapLayer({
                             data: happy_array,
                             map: map,
-                            radius: 60,
-                            gradient: happy_gradient
+                            radius: 100,
+                            gradient: happy_gradient,
+                            opacity: .5
                         });
 
                     },
