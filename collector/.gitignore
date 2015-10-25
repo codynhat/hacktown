@@ -1,4 +1,4 @@
 venv
 .DS_Store
-.pyc
-elasticsearch
+elasticsearch/logs
+elasticsearch/data

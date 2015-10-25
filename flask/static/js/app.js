@@ -1,5 +1,6 @@
 /*global google*/
 var map, heatmap;
+var MAPARRAY = [];
 
 function initMap() {
     "use strict";
@@ -18,15 +19,15 @@ function initMap() {
   });
 
     heatmap = new google.maps.visualization.HeatmapLayer({
-        data: getPoints(),
+        data: MAPARRAY,
         map: map
     });
-/*    
+/*
   happy_heatmap = new google.maps.visualization.HeatmapLayer({
     data: getPoints2(),
     map: map
   });
-    
+
     heatmap3 = new google.maps.visualization.HeatmapLayer({
         data: test(),
         map: map,
@@ -96,7 +97,6 @@ function getPoints() {
         new google.maps.LatLng(37.785360, -122.439952),
         new google.maps.LatLng(37.785715, -122.440030),
     ];
-    
     /*
     $SCRIPT_ROOT = {{request.script_root | tojson | safe}};
     var $value = $('#ideas option:selected').text();
@@ -120,4 +120,5 @@ function getPoints() {
             console.log("Details: " + desc + "\nError: " + err);
         }
    });*/
+
 }
