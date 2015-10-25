@@ -83,19 +83,15 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
 </div>
-    <div class="container-fluid">
-    <h3 class="text-center">Top 5</h3>
-        <div id='topFive'></div>
-    </div>
-<footer>
     <div class="container">
-=======
-    </div>
+
+        <h3 class="text-center">Top 5</h3>
+        <div id="topFive"></div>
+
+        </div>
     <footer>
         <div class="container">
->>>>>>> 1b497e69a115680f90fd0ffe77e6fa907bc5d945
 
         <h4 class="text-center">Holla</h4>
 
@@ -147,6 +143,19 @@
                 ]
 
                 $("select#ideas").change(function() {
+                    
+                    $.ajax({
+                        url: $SCRIPT_ROOT + '/frequency',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(json){
+                            $('#topFive').html(json)
+                        },
+                        error: function(xhr, desc, err) {
+                            console.log(xhr);
+                            console.log("Details: " + desc + "\nError: " + err);
+                        }
+                    });
 
                     var $value = $('#ideas option:selected').text();
                     $("#tweeter a").attr("href", "https://twitter.com/search?q=" + $value);
