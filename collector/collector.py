@@ -4,7 +4,7 @@ from textblob import TextBlob
 import sys
 import requests
 
-es = Elasticsearch()
+es = Elasticsearch(['http://107.170.211.113:9200'])
 
 def main():
     api = twitter.Api(consumer_key='xiRvwM5u5lgLW4GsfMq1BLxmw',
