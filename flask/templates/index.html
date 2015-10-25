@@ -15,7 +15,7 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -65,13 +65,15 @@
 
         <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+           <div class ="container">
             <div class="row">
                 <div class="12-md-col">
-                    <h1>Title of Page</h1>
+                    <h1>What's the Hack is Going On in the United States</h1>
                     <h4>Lane8</h4>
                     <p>APIs, APIs, and more APIs</p>
                 </div>
             </div>
+</div>
 
                 <div class="container">
                     <div class="row">
@@ -79,20 +81,17 @@
                         <select id = 'ideas'>
                             <option>Basketball</option>
                             <option>Oregon</option>
-                            <option>Kim Kardashian</option>
+                            <option>Trump</option>
                             <option>Adele</option>
                         </select>
                         <button id="submit" type="button" class="btn btn-default" onclick="getPoints()">Submit</button>
                         </div>
                     </div>
-    
-        <div id='map'></div>
-    
-
-
-
-    <div id="tweeter">
-    <a class="twitter-timeline" href="https://twitter.com/search?q=corgi" data-widget-id="658116944541843456"></a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <div class="container">
+        <div class="row">
+        <div id='map' class="col-md-6"></div>
+        <div class ="col-md-6"></div>
+        </div>
     </div>
 
     <script type="text/javascript">
@@ -140,7 +139,6 @@
 
                 var $value = $('#ideas option:selected').text();
                 $("#tweeter a").attr("href", "https://twitter.com/search?q=" + $value);
-                twttr.widgets.load();
                 $.ajax({
                     url: $SCRIPT_ROOT + '/_tweet_calcs', //TO DO
                     type: 'GET',
