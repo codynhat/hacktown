@@ -1,7 +1,7 @@
 var map, heatmap;
 
 function initMap() {
-  "use strict";
+    "use strict";
     map = new google.maps.Map(document.getElementById('map'), {
     zoom: 13,
     center: {lat: 37.775, lng: -122.434},
