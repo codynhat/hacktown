@@ -54,6 +54,7 @@
                 <p>APIs, APIs, and more APIs</p>
                 <form class="form-inline">
                     <select class="form-control" id='ideas'>
+                        <option>Choose!</option>
                         <option>Star Wars</option>
                         <option>Obama</option>
                         <option>Trump</option>
@@ -74,7 +75,7 @@
                 <div class ="col-md-4 col-md-push-8">
                     <div id="tweeter">
                         <ul>
-                            
+
                         </ul>
                     </div>
 =                </div>
@@ -83,17 +84,16 @@
                 </div>
             </div>
         </div>
-</div>
-    <div class="container">
-
+    </div>
+    <div class="container-fluid">
         <h3 class="text-center">Top 5</h3>
-        <div id="topFive"></div>
-
-        </div>
+        <div id='topFive'></div>
+    </div>
     <footer>
         <div class="container">
 
         <h4 class="text-center">Holla</h4>
+        <p class="text-center">Copyright © two days of straight coding one October weekend in 2015</p>
 
         </div>
     </footer>
@@ -159,6 +159,7 @@
 
                     var $value = $('#ideas option:selected').text();
                     $("#tweeter a").attr("href", "https://twitter.com/search?q=" + $value);
+                    $('#tweeter ul').empty();
                     $.ajax({
                         url: $SCRIPT_ROOT + '/_tweet_calcs', //TO DO
                         type: 'GET',
@@ -187,9 +188,9 @@
                                 }
                                 $('#tweeter ul').append('<li><h2>' + item.name + '</h2><p>' + item.text + '<p></li>');
                             });
-                            
-                            
-                        
+
+
+
                             if(typeof sad_heatmap !== 'undefined' ){
                                 sad_heatmap.setMap(null);
                             }
@@ -198,6 +199,9 @@
                                 happy_heatmap.setMap(null);
                             }
 
+                            $("button#both").css("background-color", "#FFA500");
+                            $("button#sadness").css("background-color", "#FFFFFF");
+                            $("button#happy").css("background-color", "#FFFFFF");
                             
                             sad_heatmap = new google.maps.visualization.HeatmapLayer({
                                 data: sad_array,
@@ -206,7 +210,7 @@
                                 gradient: sad_gradient,
                                 opacity: .5
                             });
-                            
+
                             happy_heatmap = new google.maps.visualization.HeatmapLayer({
                                 data: happy_array,
                                 map: map,
@@ -230,6 +234,9 @@
                     if(typeof happy_heatmap !== 'undefined' ){
                         happy_heatmap.setMap(map);
                     }
+                    $(this).css("background-color", "#FFF000");
+                    $("button#sadness").css("background-color", "#FFFFFF");
+                    $("button#both").css("background-color", "#FFFFFF");
                 });
                 $("button#sadness").click(function() {
                     if(typeof sad_heatmap !== 'undefined' ){
@@ -238,6 +245,9 @@
                     if(typeof happy_heatmap !== 'undefined' ){
                         happy_heatmap.setMap(null);
                     }
+                    $(this).css("background-color", "#FF0000");
+                    $("button#happy").css("background-color", "#FFFFFF");
+                    $("button#both").css("background-color", "#FFFFFF");
                 });
                 $("button#both").click(function() {
                     if(typeof sad_heatmap !== 'undefined' ){
@@ -246,15 +256,18 @@
                     if(typeof happy_heatmap !== 'undefined' ){
                         happy_heatmap.setMap(map);
                     }
+                    $(this).css("background-color", "#FFA500");
+                    $("button#sadness").css("background-color", "#FFFFFF");
+                    $("button#happy").css("background-color", "#FFFFFF");
                 });
             }
 
 
-            
-            
 
 
-    
+
+
+
     </script>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=visualization&callback=initMap"></script>
