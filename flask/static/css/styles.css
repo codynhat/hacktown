@@ -67,4 +67,12 @@ li{
     border-radius: 0px;
 }
 
+.jumbotron{
+    border-radius: 0px !important;
+}
+
+.navbar{
+    border-radius: 0px;
+}
+
 
