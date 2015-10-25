@@ -14,8 +14,17 @@ footer {
 #foot {
     background-color: #eee;
 }
-table#tweeter strong{
+table#tweeter strong {
     text-transform: uppercase;
+}
+td#happy strong {
+    color: #f1c40f;
+}
+td#sad strong{
+    color: #d9534f;
+}
+td#neutral strong {
+    color: #5bc0de;
 }
 
 #bad{
