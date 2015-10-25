@@ -55,6 +55,8 @@ def getLatLng(location):
     },params=payload);
 
     re = r.json()
+    if re['results'][0]['locations'][0]["geocodeQuality"] == "COUNTRY":
+      return None
     latLng = re['results'][0]['locations'][0]['latLng']
     return latLng
 
