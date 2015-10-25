@@ -10,10 +10,14 @@ es = Elasticsearch(['http://107.170.211.113:9200'])
 
 
 def main():
-    api = twitter.Api(consumer_key='xiRvwM5u5lgLW4GsfMq1BLxmw',
-                      consumer_secret='A7IPWnxsfTfTccnuyF9TXPXEBwpC6WyEVwkNseJXxv4SVqhncd',
-                      access_token_key='1939224967-lZqH7LpKSs775MCNK2ynZlJ0meUIcDt9QiM5KAt',
-                      access_token_secret='bgelSzudLaRrKaQcIHvXOXvNW7QaoNpEiaLmnGAnvYNmt')
+    api = twitter.Api(consumer_key = 'cVkMNul8qtA5W6dnWMaqRPMxO',
+                consumer_secret = 'lYabB5Lq1FkZwY9S7qoBKaArUsrTDzme5l6WhpYEAYFeEYNfmr',
+                access_token_key = '189645598-d85uGGNvjhdFTUL2rfmaIj4IHrRe3N4X2PZOm5AD',
+                access_token_secret = 'TS3vqXwkm3wmTdTS1avi6kLzT3mRRDBbFskiBMF6v7LAG')
+#    api = twitter.Api(consumer_key='xiRvwM5u5lgLW4GsfMq1BLxmw',
+#                      consumer_secret='A7IPWnxsfTfTccnuyF9TXPXEBwpC6WyEVwkNseJXxv4SVqhncd',
+#                      access_token_key='1939224967-lZqH7LpKSs775MCNK2ynZlJ0meUIcDt9QiM5KAt',
+#                      access_token_secret='bgelSzudLaRrKaQcIHvXOXvNW7QaoNpEiaLmnGAnvYNmt')
     term = "adele"
     numberofqueries = 2
     if len(sys.argv) > 1:
