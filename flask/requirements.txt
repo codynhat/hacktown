@@ -1,5 +1,4 @@
 nltk==3.1
-numpy==1.10.1
 arrow==0.6.0
 Flask==0.10.1
 itsdangerous==0.24

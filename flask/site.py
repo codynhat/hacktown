@@ -13,7 +13,6 @@ from flask import jsonify  # For AJAX transactions
 import json
 import logging
 from elasticsearch import Elasticsearch
-from nltk.corpus import stopwords
 
 ###
 # Globals
@@ -66,28 +65,7 @@ def calc_tweets():
         c += 1000
     return jsonify({"result": result})
 
-@app.route("/munging")
-def munging():
-    theStopwordsDic = set(stopwords.words('english'))
-    #query = request.args['query']
-    #query = query.lower()
-    result = []
-    locations = []
-    res = es.search(index="index", body={"query": {"match_all": {}}}, doc_type="bad", size=20)["hits"]["hits"]
-    for r in res:
-        a = {"loc": r["_source"]["location"]}
-        loc = a["loc"]
-        result.append(loc)
-    for line in result:
-        a = filter(lambda word: not word in theStopwordsDic,line)
-        if (a != ""):
-            locations.append(a)
 
-    a = arrayOfStrings
-    counter = collections.Counter(a)
-    topFive = counter.most_common(5)
-    topBadTopics = [x[0] for x in topFive]
-    return jsonify({"topBadTopics": topBadTopics})
     
 #############
 
