@@ -9932,3 +9932,22 @@ Caused by: java.io.FileNotFoundException: /Users/Cody/Documents/Projects/hacktow
 [2015-10-24 18:49:54,067][WARN ][cluster.routing.allocation.decider] [Her] high disk watermark [90%] exceeded on [YElWIVZlRKSEXgDL6Jv7EQ][Her] free: 5.2gb[5.6%], shards will be relocated away from this node
 [2015-10-24 18:50:27,225][WARN ][cluster.routing.allocation.decider] [Her] high disk watermark [90%] exceeded on [YElWIVZlRKSEXgDL6Jv7EQ][Her] free: 5.2gb[5.6%], shards will be relocated away from this node
 [2015-10-24 18:50:27,225][INFO ][cluster.routing.allocation.decider] [Her] high disk watermark exceeded on one or more nodes, rerouting shards
+[2015-10-24 18:50:57,227][WARN ][cluster.routing.allocation.decider] [Her] high disk watermark [90%] exceeded on [YElWIVZlRKSEXgDL6Jv7EQ][Her] free: 5.2gb[5.6%], shards will be relocated away from this node
+[2015-10-24 18:51:27,232][WARN ][cluster.routing.allocation.decider] [Her] high disk watermark [90%] exceeded on [YElWIVZlRKSEXgDL6Jv7EQ][Her] free: 5.2gb[5.6%], shards will be relocated away from this node
+[2015-10-24 18:51:27,232][INFO ][cluster.routing.allocation.decider] [Her] high disk watermark exceeded on one or more nodes, rerouting shards
+[2015-10-24 18:51:57,237][WARN ][cluster.routing.allocation.decider] [Her] high disk watermark [90%] exceeded on [YElWIVZlRKSEXgDL6Jv7EQ][Her] free: 5.2gb[5.6%], shards will be relocated away from this node
+[2015-10-24 18:52:27,243][WARN ][cluster.routing.allocation.decider] [Her] high disk watermark [90%] exceeded on [YElWIVZlRKSEXgDL6Jv7EQ][Her] free: 5.2gb[5.6%], shards will be relocated away from this node
+[2015-10-24 18:52:27,244][INFO ][cluster.routing.allocation.decider] [Her] high disk watermark exceeded on one or more nodes, rerouting shards
+[2015-10-24 18:52:57,254][WARN ][cluster.routing.allocation.decider] [Her] high disk watermark [90%] exceeded on [YElWIVZlRKSEXgDL6Jv7EQ][Her] free: 5.2gb[5.6%], shards will be relocated away from this node
+[2015-10-24 18:53:27,259][WARN ][cluster.routing.allocation.decider] [Her] high disk watermark [90%] exceeded on [YElWIVZlRKSEXgDL6Jv7EQ][Her] free: 5.2gb[5.6%], shards will be relocated away from this node
+[2015-10-24 18:53:27,259][INFO ][cluster.routing.allocation.decider] [Her] high disk watermark exceeded on one or more nodes, rerouting shards
+[2015-10-24 18:54:32,307][WARN ][cluster.routing.allocation.decider] [Her] high disk watermark [90%] exceeded on [YElWIVZlRKSEXgDL6Jv7EQ][Her] free: 5.2gb[5.6%], shards will be relocated away from this node
+[2015-10-24 18:55:02,311][WARN ][cluster.routing.allocation.decider] [Her] high disk watermark [90%] exceeded on [YElWIVZlRKSEXgDL6Jv7EQ][Her] free: 5.2gb[5.6%], shards will be relocated away from this node
+[2015-10-24 18:55:02,311][INFO ][cluster.routing.allocation.decider] [Her] high disk watermark exceeded on one or more nodes, rerouting shards
+[2015-10-24 18:55:32,317][WARN ][cluster.routing.allocation.decider] [Her] high disk watermark [90%] exceeded on [YElWIVZlRKSEXgDL6Jv7EQ][Her] free: 5.2gb[5.6%], shards will be relocated away from this node
+[2015-10-24 18:56:02,323][WARN ][cluster.routing.allocation.decider] [Her] high disk watermark [90%] exceeded on [YElWIVZlRKSEXgDL6Jv7EQ][Her] free: 5.2gb[5.6%], shards will be relocated away from this node
+[2015-10-24 18:56:02,324][INFO ][cluster.routing.allocation.decider] [Her] high disk watermark exceeded on one or more nodes, rerouting shards
+[2015-10-24 18:56:32,328][WARN ][cluster.routing.allocation.decider] [Her] high disk watermark [90%] exceeded on [YElWIVZlRKSEXgDL6Jv7EQ][Her] free: 5.2gb[5.6%], shards will be relocated away from this node
+[2015-10-24 18:57:02,329][WARN ][cluster.routing.allocation.decider] [Her] high disk watermark [90%] exceeded on [YElWIVZlRKSEXgDL6Jv7EQ][Her] free: 5.2gb[5.6%], shards will be relocated away from this node
+[2015-10-24 18:57:02,329][INFO ][cluster.routing.allocation.decider] [Her] high disk watermark exceeded on one or more nodes, rerouting shards
+[2015-10-24 18:57:32,332][WARN ][cluster.routing.allocation.decider] [Her] high disk watermark [90%] exceeded on [YElWIVZlRKSEXgDL6Jv7EQ][Her] free: 5.2gb[5.6%], shards will be relocated away from this node

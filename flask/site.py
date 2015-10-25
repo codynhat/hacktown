@@ -54,6 +54,7 @@ def page_not_found(error):
 @app.route("/_tweet_calcs")
 def calc_tweets():
     query = request.args['query']
+    query = query.lower()
     res = es.search(index="index", body={"query": {"match_all": {}}}, doc_type=query, size=100)["hits"]["hits"]
     result = []
     for r in res:
