@@ -1,17 +1,18 @@
+/*global google*/
 var map, heatmap;
 
 function initMap() {
     "use strict";
     map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 13,
-    center: {lat: 37.775, lng: -122.434},
-    mapTypeId: google.maps.MapTypeId.SATELLITE
-  });
+        zoom: 13,
+        center: {lat: 37.775, lng: -122.434},
+        mapTypeId: google.maps.MapTypeId.SATELLITE
+    });
 
-  heatmap = new google.maps.visualization.HeatmapLayer({
-    data: getPoints(),
-    map: map
-  });
+    heatmap = new google.maps.visualization.HeatmapLayer({
+        data: getPoints(),
+        map: map
+    });
 /*    
   happy_heatmap = new google.maps.visualization.HeatmapLayer({
     data: getPoints2(),
@@ -27,7 +28,8 @@ function initMap() {
 
 
 function toggleHeatmap() {
-  heatmap.setMap(heatmap.getMap() ? null : map);
+  "use strict";
+    heatmap.setMap(heatmap.getMap() ? null : map);
 }
 
 function changeGradient() {
