@@ -4,10 +4,18 @@ var map, heatmap;
 function initMap() {
     "use strict";
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 13,
-        center: {lat: 37.775, lng: -122.434},
-        mapTypeId: google.maps.MapTypeId.SATELLITE
-    });
+    zoom: 4,
+    center: {lat: 38.8833, lng: -102.9833},
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    disableDefaultUI: true,
+    scrollwheel: false,
+    zoomControl: false,
+    navigationControl: false,
+    mapTypeControl: false,
+    scaleControl: false,
+    draggable: false,
+    disableDoubleClickZoom: true
+  });
 
     heatmap = new google.maps.visualization.HeatmapLayer({
         data: getPoints(),
@@ -32,7 +40,7 @@ function toggleHeatmap() {
     heatmap.setMap(heatmap.getMap() ? null : map);
 }
 
-function changeGradient() {
+/*function changeGradient() {
   var gradient = [
     'rgba(0, 255, 255, 0)',
     'rgba(0, 0, 223, 1)',
@@ -59,7 +67,7 @@ function changeRadius() {
 
 function changeOpacity() {
   heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
-}
+}*/
 
 // Heatmap data: 500 Points
 function getPoints() {
