@@ -9,6 +9,7 @@
     <title>HackTownUSA</title>
 
     <!-- Bootstrap -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <link href="static/css/styles.css" rel="stylesheet">
 <script type="text/javascript" src="static/js/app.js"></script>
@@ -24,36 +25,6 @@
     <![endif]-->
   </head>
   <body>
-      {% with messages = get_flashed_messages() %} {% if messages %}
-      <ul class=flashes>
-          {% for message in messages %}
-          <li>{{ message }}</li>
-          {% endfor %}
-      </ul>
-      {% endif %} {% endwith %}
-
-<!----- NAVIGATION ------------->
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-      </button>
-      <a class="navbar-brand" href="#">Lane8</a>
-    </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-     <ul class="nav navbar-nav">
-       <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
-         </ul>
-       </li>
-     </ul>
-       </li>
-     </ul>
-   </div><!-- /.navbar-collapse -->
- </div><!-- /.container-fluid -->
-</nav>
 
     {% with messages = get_flashed_messages() %} {% if messages %}
     <ul class=flashes>
@@ -77,21 +48,30 @@
 
                 <div class="container">
                     <div class="row">
-                        <input type="text" name="query" placeholder="Type in what you want to search!">
-                        <select id = 'ideas'>
+                        <form class="form-inline">
+                        <input class="form-control" type="text" name="query" placeholder="Type in what you want to search!">
+                        <select class="form-control" id = 'ideas'>
                             <option>Basketball</option>
                             <option>Oregon</option>
                             <option>Trump</option>
                             <option>Adele</option>
                         </select>
                         <button id="submit" type="button" class="btn btn-default" onclick="getPoints()">Submit</button>
+</form>
                         </div>
                     </div>
 
+<<<<<<< HEAD
             <div class="container-fluid">
                         <div class="row">
 
                 <div class="col-md-12">
+=======
+<div class="container-fluid">
+        <div class="row">
+
+<div class="col-md-12">
+>>>>>>> b6d6597609f531f4f3d875e7eb331d0a1d34ff4c
             <div class="col-md-8 col-md-push-4">
         <div id='map'></div>
     </div>
@@ -128,12 +108,12 @@
             });
             var happy_gradient = [
                 'rgba(255, 255, 255, 0)', //Transparent
-                'rgba(255, 255, 180, 0.6)',
-                'rgba(255, 255, 150, 0.8)',
-                'rgba(255, 255, 100, 1)',
-                'rgba(255, 255, 50, 1)',
-                'rgba(255, 200, 10, 1)',
-                'rgba(255, 200, 0, 1)'
+                'rgba(255, 255, 150, 0.6)',
+                'rgba(255, 255, 120, 0.8)',
+                'rgba(255, 255, 90, 1)',
+                'rgba(255, 255, 60, 1)',
+                'rgba(255, 255, 40, 1)',
+                'rgba(255, 255, 0, 1)'
 
             ]
 
@@ -182,7 +162,7 @@
                         sad_heatmap = new google.maps.visualization.HeatmapLayer({
                             data: sad_array,
                             map: map,
-                            radius: 70,
+                            radius: 60,
                             gradient: sad_gradient
                         });
 
@@ -190,7 +170,7 @@
                         happy_heatmap = new google.maps.visualization.HeatmapLayer({
                             data: happy_array,
                             map: map,
-                            radius: 70,
+                            radius: 60,
                             gradient: happy_gradient
                         });
 
