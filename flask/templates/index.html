@@ -41,9 +41,7 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-            Lane8
-        </a>
+                <a class="navbar-brand" href="#">Lane8</a>
                 <p class="navbar-text">lets get hacky</p>
             </div>
         </div>
@@ -69,29 +67,23 @@
                 </form>
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-4 col-md-push-8">
-                        <div id="tweeter">
-                            <ul>
-                                <li>
-                                    <div>
-                                        <h1>YAY</h1>
-                                        <p>Maybe</p>
-                                    </div>
-                                </li>
-                                <li>BOBY</li>
-                                <li>DOG</li>
-                            </ul>
-                        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class ="col-md-4 col-md-push-8">
+                    <div id="tweeter">
+                        <ul>
+                            
+                        </ul>
                     </div>
-                    <div class="col-md-8 col-md-pull-4">
-                        <div id='map'></div>
-                    </div>
+=                </div>
+                <div class="col-md-8 col-md-pull-4">
+                    <div id='map'></div>f
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
 </div>
     <div class="container-fluid">
     <h3 class="text-center">Top 5</h3>
@@ -99,11 +91,16 @@
     </div>
 <footer>
     <div class="container">
+=======
+    </div>
+    <footer>
+        <div class="container">
+>>>>>>> 1b497e69a115680f90fd0ffe77e6fa907bc5d945
 
-    <h4 class="text-center">Holla</h4>
+        <h4 class="text-center">Holla</h4>
 
-</div>
-</footer>
+        </div>
+    </footer>
 
         <script type="text/javascript">
             /*global google*/
@@ -179,14 +176,20 @@
                                     };
                                     happy_array.push(weightedLoc);
                                 }
+                                $('#tweeter ul').append('<li><h2>' + item.name + '</h2><p>' + item.text + '<p></li>');
                             });
-                            if (typeof sad_heatmap !== 'undefined') {
+                            
+                            
+                        
+                            if(typeof sad_heatmap !== 'undefined' ){
                                 sad_heatmap.setMap(null);
                             }
-                            if (typeof happy_heatmap !== 'undefined') {
+
+                            if(typeof happy_heatmap !== 'undefined' ){
                                 happy_heatmap.setMap(null);
                             }
 
+                            
                             sad_heatmap = new google.maps.visualization.HeatmapLayer({
                                 data: sad_array,
                                 map: map,
@@ -194,20 +197,12 @@
                                 gradient: sad_gradient,
                                 opacity: .5
                             });
-
-
+                            
                             happy_heatmap = new google.maps.visualization.HeatmapLayer({
                                 data: happy_array,
                                 map: map,
-                                radius: 70,
+                                radius: 100,
                                 gradient: happy_gradient,
-                                opacity: .8
-                            });
-                            sad_heatmap = new google.maps.visualization.HeatmapLayer({
-                                data: sad_array,
-                                map: map,
-                                radius: 70,
-                                gradient: sad_gradient,
                                 opacity: .5
                             });
 
@@ -219,52 +214,41 @@
                     })
                 });
 
-                $("button#happy").click(function() {});
-                $("button#sad").click(function() {});
-                $("button#both").click(function() {});
+                $("button#happy").click(function() {
+                    if(typeof sad_heatmap !== 'undefined' ){
+                        sad_heatmap.setMap(null);
+                    }
+                    if(typeof happy_heatmap !== 'undefined' ){
+                        happy_heatmap.setMap(map);
+                    }
+                });
+                $("button#sadness").click(function() {
+                    if(typeof sad_heatmap !== 'undefined' ){
+                        sad_heatmap.setMap(map);
+                    }
+                    if(typeof happy_heatmap !== 'undefined' ){
+                        happy_heatmap.setMap(null);
+                    }
+                });
+                $("button#both").click(function() {
+                    if(typeof sad_heatmap !== 'undefined' ){
+                        sad_heatmap.setMap(map);
+                    }
+                    if(typeof happy_heatmap !== 'undefined' ){
+                        happy_heatmap.setMap(map);
+                    }
+                });
             }
 
 
-            function toggleHeatmap() {
-                "use strict";
-                heatmap.setMap(heatmap.getMap() ? null : map);
-            }
-
-            /*function changeGradient() {
-            var gradient = [
-            'rgba(0, 255, 255, 0)',
-            'rgba(0, 0, 223, 1)',
-            'rgba(0, 0, 255, 1)',
-            'rgba(0, 63, 255, 1)',
-            'rgba(0, 127, 255, 1)',
-            'rgba(0, 191, 255, 1)',
-            'rgba(0, 255, 255, 1)',
-            'rgba(0, 255, 255, 0)', //Transparent
-            'rgba(0, 0, 191, 1)',
-            'rgba(0, 0, 159, 1)',
-            'rgba(0, 0, 127, 1)',
-            'rgba(63, 0, 91, 1)',
-            'rgba(127, 0, 63, 1)',
-            'rgba(191, 0, 31, 1)',
-            'rgba(0, 0, 191, 1)',
-            ]
-            heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
-            }
-
-            function changeRadius() {
-            heatmap.set('radius', heatmap.get('radius') ? null : 20);
-            }
-
-            function changeOpacity() {
-            heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
-            }*/
-
-            // Heatmap data: 500 Points
-        </script>
-
-        <script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=visualization&callback=initMap"></script>
+            
+            
 
 
+    
+    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=visualization&callback=initMap"></script>
 
 
 </body>

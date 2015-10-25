@@ -55,11 +55,14 @@ def page_not_found(error):
 def calc_tweets():
     query = request.args['query']
     query = query.lower()
-    res = es.search(index="index", body={"query": {"match_all": {}}}, doc_type=query, size=1000)["hits"]["hits"]
     result = []
-    for r in res:
-        a = {"lat": r["_source"]["lat"], "lng": r["_source"]["lng"], "wgt": r["_source"]["score"], "name": r["_source"]["name"], "text": r["_source"]["text"]}
-        result.append(a)
+    c = 0
+    while c < 10000:
+        res = es.search(index="index", body={"query": {"match_all": {}}}, doc_type=query, size=1000, from=c)["hits"]["hits"]
+        for r in res:
+            a = {"lat": r["_source"]["lat"], "lng": r["_source"]["lng"], "wgt": r["_source"]["score"], "name": r["_source"]["name"], "text": r["_source"]["text"]}
+            result.append(a)
+        c += 1000
     return jsonify({"result": result})
 
 
