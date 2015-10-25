@@ -25,7 +25,7 @@ def main():
 		result.append(loc)
 	s = deleteCommonWords(result)
 	re = frequency.doTheTuples(s)
-	print re
+	return re
 
 if __name__ == "__main__":
     main()
