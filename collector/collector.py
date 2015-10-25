@@ -24,11 +24,15 @@ def main():
     lastid=logTweets(query, valueswecareabout)
 
     for i in range(numberofqueries-1):
+        if lastid == -1:
+            break
         query = getTweets(api, term, geo, lastid-1)
         lastid = logTweets(query, valueswecareabout)
             
     i = 0
-    totalsentiment = 0
+    possentiment = 0
+    negsentiment = 0
+    sentcount = 0
     for tweet in valueswecareabout:
         lat = None
         lng = None
@@ -43,11 +47,16 @@ def main():
             lat = latLng["lat"]
             lng = latLng["lng"]
         score = getSentiment(tweet[0])
-        totalsentiment += score
-        print score
+        if score>0.01:
+            possentiment += score
+            sentcount += 1
+        elif score<-0.01:
+            negsentiment += score
+            sentcount += 1
+        #print score
         es.index(index="index", doc_type=term, body={"lat": lat, "lng": lng, "score": score}, id=i)
         i += 1
-    print totalsentiment
+    print sentcount, possentiment, negsentiment
 
 def getTweets(api, searchterm, geo, last_id):
     if last_id:
@@ -57,6 +66,8 @@ def getTweets(api, searchterm, geo, last_id):
     return query
     
 def logTweets(query, valueswecareabout):
+    if len(query)==0:
+        return -1
     for status in query:
         valueswecareabout.append((status.text, status.user.location, status.coordinates, status.geo, status.place))
     return query[-1].id
