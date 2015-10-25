@@ -8,11 +8,15 @@ import flask
 from flask import render_template
 from flask import request
 from flask import url_for
+<<<<<<< HEAD
+from flask import jsonify
+=======
 from flask import jsonify  # For AJAX transactions
+>>>>>>> 587b0722524bea4dd74ef982498e3a34bd8b6f31
 
 import json
 import logging
-
+from elasticsearch import Elasticsearch
 
 ###
 # Globals
@@ -25,6 +29,7 @@ app.secret_key = str(uuid.uuid4())
 app.debug=CONFIG.DEBUG
 app.logger.setLevel(logging.DEBUG)
 
+es = Elasticsearch()
 
 ###
 # Pages
@@ -52,10 +57,13 @@ def page_not_found(error):
 
 @app.route("/_tweet_calcs")
 def calc_tweets():
-    results = request.args.get('query', 'hi',type=str)
-    print(results)
-    result = {'lat':51.5033630,'lng':-0.1276250,'wgt':1}
-    return jsonify(result=result)
+    query = request.args['query']
+    res = es.search(index="index", body={"query": {"match_all": {}}}, doc_type=query, size=100)["hits"]["hits"]
+    result = []
+    for r in res:
+        a = {"lat": r["_source"]["lat"], "lng": r["_source"]["lng"], "wgt": r["_source"]["score"]}
+        result.append(a)
+    return jsonify({"result": result})
 
 
 #############
