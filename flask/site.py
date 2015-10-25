@@ -8,6 +8,7 @@ import flask
 from flask import render_template
 from flask import request
 from flask import url_for
+from flask import jsonify  # For AJAX transactions
 
 import json
 import logging
@@ -51,8 +52,10 @@ def page_not_found(error):
 
 @app.route("/_tweet_calcs")
 def calc_tweets():
-
-    return jsonify(result)
+    results = request.args.get('query', 'hi',type=str)
+    print(results)
+    result = {'lat':51.5033630,'lng':-0.1276250,'wgt':1}
+    return jsonify(result=result)
 
 
 #############

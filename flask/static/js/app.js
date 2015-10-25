@@ -13,12 +13,12 @@ function initMap() {
         data: getPoints(),
         map: map
     });
-/*    
+/*
   happy_heatmap = new google.maps.visualization.HeatmapLayer({
     data: getPoints2(),
     map: map
   });
-    
+
     heatmap3 = new google.maps.visualization.HeatmapLayer({
         data: test(),
         map: map,
@@ -88,27 +88,5 @@ function getPoints() {
     new google.maps.LatLng(37.785360, -122.439952),
     new google.maps.LatLng(37.785715, -122.440030),
     ];
-    
-    /*
-    $SCRIPT_ROOT = {{request.script_root | tojson | safe}};
-    var $value = $('#ideas option:selected').html();
-    $.ajax({
-        url: $SCRIPT_ROOT + '/_tweet_calcs', //TO DO
-        type: 'GET',
-        dataType: 'json',
-        data: {
-            'query' : $value
-        },
-        success: function(json) {
-            var array = [];
-            $.each(json, function (i, item) {
-                array.push(new google.maps.visualization.WeightLocation(google.maps.LatLng(json.lat, json.long), json.weight + 1.01));
-            });
-            return array;
-        },
-        error: function (xhr, desc, err) {
-            console.log(xhr);
-            console.log("Details: " + desc + "\nError: " + err);
-        }
-   });*/
+
 }
