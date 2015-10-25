@@ -67,6 +67,9 @@ def calc_tweets():
 
 @app.route("/munging")
 def munging():
+    query = request.args['query']
+    query = query.lower()
+    result = []
     
 #############
 
