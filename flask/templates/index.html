@@ -24,14 +24,11 @@
     <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script type="text/javascript" src="static/js/jquery-2.1.4.min.js"></script>
-<<<<<<< HEAD
+
     <script type="text/javascript" src="static/js/app.js"></script>
 
-=======
-    <script type="text/javascript" src="static/js/app.js"></script> 
->>>>>>> 90c0c5d5ab9ccace21675f962febe402d065fab9
 </head>
-    
+
 <body>
 
     {% with messages = get_flashed_messages() %} {% if messages %}
@@ -52,7 +49,6 @@
                 </div>
             </div>
 
-<<<<<<< HEAD
                 <div class="container">
                     <div class="row">
                         <input type="text" name="query" placeholder="Type in what you want to search!">
@@ -97,23 +93,6 @@ $(document).ready(function() {
    })
    </script>
                 <script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&signed_in=true&libraries=visualization&callback=initMap">
-=======
-            <div class="container">
-                <div class="row">
-                    <input type="text" name="query" placeholder="Type in what you want to search!">
-                    <select id = 'ideas'>
-                        <option>Basketball</option>
-                        <option>Oregon</option>
-                        <option>Kim Kardashian</option>
-                    </select>
-                    <button id="submit" type="button" class="btn btn-default" onclick="getPoints()">Submit</button>
-                </div>
-            </div>
-            
-            <div id="map"></div>
-    
-                <script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=visualization&callback=initMap">
->>>>>>> 90c0c5d5ab9ccace21675f962febe402d065fab9
                 </script>
 </body>
 
