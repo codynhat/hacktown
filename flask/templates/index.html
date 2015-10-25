@@ -61,6 +61,13 @@
                         <option>Adele</option>
                         <option>Concert</option>
                         <option>Marijuana</option>
+                        <option>Police</option>
+                        <option>Sanders</option>
+                        <option>Twerk</option>
+                        <option>Kardashian</option>
+                        <option>Comcast</option>
+                        <option>School</option>
+                        <option>Clinton</option>
                     </select>
                     <div class='btn-group'>
                         <button id="all" type="button" class="btn btn-default">All</button>
@@ -93,16 +100,39 @@
     <br>
     <br>
     <div class="panel">
-        <h3>Location Samples</h3>
+        <h3>Locations That We Couldn't Parse</h3>
         <div class = "row" id='topFive'></div>
     </div>
     <footer>
         <div class="container">
+        
+        <table style="width:100%">
+            <tr>
+                <td>  </td>
+                <td>
+                    <h4 class="text-center">Holla</h4>
+                    <p class="text-center">Copyright © two days of straight coding one October weekend in 2015</p>
+                </td>
+                <td>
+                    <a onclick="openWin()" class="button">Do not press this button.</a>
+                </td> 
+            </tr>
 
-        <h4 class="text-center">Holla</h4>
-        <p class="text-center">Copyright © two days of straight coding one October weekend in 2015</p>
+        <script>
+        var myWindow;
 
-        </div>
+        function openWin() {
+            myWindow = window.open("https://www.youtube.com/watch?v=58mah_0Y8TU", "_blank", "width=2000, height=2000");
+        }
+
+        function closeWin() {
+            myWindow.close();
+        }
+        </script>
+
+
+
+
     </footer>
 
         <script type="text/javascript">
@@ -174,7 +204,6 @@
                             'query' : $value
                         },
                         success: function(json) {
-                            console.log(json);
                             $("#topFive").empty();
                             if(json.result.length == 0){
                                 $("#topFive").append("<p>Satan's Asshole</p>");
@@ -206,7 +235,6 @@
                             'query': $value
                         },
                         success: function(json) {
-                            console.log(json);
                             var happy_array = [];
                             var sad_array = [];
                             var neutral_array = [];
@@ -276,7 +304,7 @@
                             neutral_heatmap = new google.maps.visualization.HeatmapLayer({
                                 data: neutral_array,
                                 map: map,
-                                radius: 80,
+                                radius: 70,
                                 gradient: neutral_gradient,
                                 opacity: .5
                             });
