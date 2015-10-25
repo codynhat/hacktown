@@ -76,3 +76,52 @@ li{
 }
 
 
+.button {
+   border: 1px solid #000000;
+   background: #4e8cb5;
+   background: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#4e8cb5));
+   background: -webkit-linear-gradient(top, #000000, #4e8cb5);
+   background: -moz-linear-gradient(top, #000000, #4e8cb5);
+   background: -ms-linear-gradient(top, #000000, #4e8cb5);
+   background: -o-linear-gradient(top, #000000, #4e8cb5);
+   background-image: -ms-linear-gradient(top, #000000 0%, #4e8cb5 100%);
+   padding: 5.5px 11px;
+   -webkit-border-radius: 12px;
+   -moz-border-radius: 12px;
+   border-radius: 12px;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   text-shadow: #ff5252 0 1px 0;
+   color: #ff4545;
+   font-size: 13px;
+   font-family: helvetica, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.button:hover {
+   border: 1px solid #000000;
+   text-shadow: #ffffff 0 1px 0;
+   background: #f51e1e;
+   background: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#f51e1e));
+   background: -webkit-linear-gradient(top, #000000, #f51e1e);
+   background: -moz-linear-gradient(top, #000000, #f51e1e);
+   background: -ms-linear-gradient(top, #000000, #f51e1e);
+   background: -o-linear-gradient(top, #000000, #f51e1e);
+   background-image: -ms-linear-gradient(top, #000000 0%, #f51e1e 100%);
+   color: #fff;
+   }
+.button:active {
+   text-shadow: #ffffff 0 1px 0;
+   border: 1px solid #000000;
+   background: #39f039;
+   background: -webkit-gradient(linear, left top, left bottom, from(#faff61), to(#f51e1e));
+   background: -webkit-linear-gradient(top, #faff61, #39f039);
+   background: -moz-linear-gradient(top, #faff61, #39f039);
+   background: -ms-linear-gradient(top, #faff61, #39f039);
+   background: -o-linear-gradient(top, #faff61, #39f039);
+   background-image: -ms-linear-gradient(top, #faff61 0%, #39f039 100%);
+   color: #000000;
+   }
+
+

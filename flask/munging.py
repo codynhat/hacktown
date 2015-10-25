@@ -13,9 +13,10 @@ def randomBadLocations():
 		if (loc != ''):
 			result.append(loc)
 	index = randint(0, size - 6)
+	arr = []
 	print index
-	print {result[index], result[index+1], result[index+2], result[index+3], result[index+4]}
-
+	arr = {result[index], result[index+1], result[index+2], result[index+3], result[index+4]}
+	print arr
 
 if __name__ == "__main__":
     randomBadLocations()

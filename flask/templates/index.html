@@ -96,7 +96,22 @@
         <h4 class="text-center">Holla</h4>
         <p class="text-center">Copyright © two days of straight coding one October weekend in 2015</p>
 
-        </div>
+        <button onclick="openWin()" class="button">Do not press this button.</button>
+        <script>
+        var myWindow;
+
+        function openWin() {
+            myWindow = window.open("https://www.youtube.com/watch?v=58mah_0Y8TU", "_blank", "width=2000, height=2000");
+        }
+
+        function closeWin() {
+            myWindow.close();
+        }
+        </script>
+
+
+
+
     </footer>
 
         <script type="text/javascript">
