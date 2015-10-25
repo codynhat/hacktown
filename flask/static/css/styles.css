@@ -19,7 +19,9 @@ footer {
 
 h3{
     text-align: center;
-    padding: 10px;
+}
+#topFive{
+    margin: 0;
 }
 
 #map {
@@ -93,5 +95,7 @@ p{
 h2{
     margin: 10px;
 }
+
+
 
 

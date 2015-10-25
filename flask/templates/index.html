@@ -59,6 +59,8 @@
                         <option>Obama</option>
                         <option>Trump</option>
                         <option>Adele</option>
+                        <option>Concert</option>
+                        <option>Marijuana</option>
                     </select>
                     <div class='btn-group'>
                         <button id="all" type="button" class="btn btn-default">All</button>
@@ -185,6 +187,7 @@
                                 $("#topFive").append("<div id='bad' class='col-md-2'>" + json.result[2] + "</div>");
                                 $("#topFive").append("<div id='bad' class='col-md-2'>" + json.result[3] + "</div>");
                                 $("#topFive").append("<div id='bad' class='col-md-2'>" + json.result[4] + "</div>");
+                                $("#topFive").append("<div id='bad' class='col-md-1'></div>");
                             }
                         }
                     });
