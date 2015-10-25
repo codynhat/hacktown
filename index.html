@@ -1,55 +1,217 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Heatmaps</title>
-        <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="js/app.js"></script>
-        <style>
-            html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-            #map {
-        height: 100%;
-      }
-            #floating-panel {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  padding: 5px;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  padding-left: 10px;
+<html lang="en">
+<head>
+    <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>Your page title here :)</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+    <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="static/css/normalize.css">
+    <link rel="stylesheet" href="static/css/skeleton.css">
+    <link rel="stylesheet" href="static/css/styles.css">
+    <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script type="text/javascript" src="static/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="static/js/app.js"></script>
+
+</head>
+
+<body>
+
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+
+        <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+            <div class="row">
+                <div class="u-max-full-width column">
+                    <h1>Title of Page</h1>
+                    <h4>Lane8</h4>
+                    <p>APIs, APIs, and more APIs</p>
+                    <p>My fave numbers: {% for n in range(1,10) %}{{n}} " " {% endfor %}</p>
+                </div>
+            </div>
+
+                <div class="container">
+                    <div class="row">
+                        <input type="text" name="query" placeholder="Type in what you want to search!">
+                        <select id = 'ideas'>
+                            <option>Basketball</option>
+                            <option>Oregon</option>
+                            <option>Kim Kardashian</option>
+                            <option>Adele</option>
+                        </select>
+                        <button id="submit" type="button" class="btn btn-default" onclick="getPoints()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+    <div id="map"></div>
+    <div id="tweeter">
+    <a class="twitter-timeline" href="https://twitter.com/search?q=corgi" data-widget-id="658116944541843456"></a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </div>
+
+    <script type="text/javascript">
+        /*global google*/
+        var map, heatmap;
+        $SCRIPT_ROOT = {{request.script_root | tojson | safe}};
+        
+        function initMap() {
+            "use strict";
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 5,
+                center: {lat: 38.8833, lng: -102.9833},
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                disableDefaultUI: true,
+                scrollwheel: false,
+                zoomControl: false,
+                navigationControl: false,
+                mapTypeControl: false,
+                scaleControl: false,
+                draggable: false,
+                disableDoubleClickZoom: false
+            });
+            var happy_gradient = [
+                'rgba(0, 255, 255, 0)', //Transparent
+                'rgba(255, 0, 80, 1)',
+                'rgba(255, 0, 50, 1)',
+                'rgba(255, 0, 40, 1)',
+                'rgba(255, 0, 30, 1)',
+                'rgba(255, 0, 20, 1)',
+                'rgba(255, 0, 0, 1)',//start
+                
+            ]
+            
+            var sad_gradient = [
+                'rgba(0, 255, 255, 0)',
+                'rgba(0, 100, 255, 1)',
+                'rgba(0, 80, 225, 1)',
+                'rgba(0, 40, 255, 1)',
+                'rgba(0, 20, 255, 1)',
+                'rgba(0, 20, 200, 1)',
+                'rgba(0, 0, 200, 1)',
+            ]
+            
+            $("button#submit").click(function() {
+                
+                var $value = $('#ideas option:selected').text();
+                $("#tweeter a").attr("href", "https://twitter.com/search?q=" + $value);
+                twttr.widgets.load();
+                $.ajax({
+                    url: $SCRIPT_ROOT + '/_tweet_calcs', //TO DO
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        'query' : $value
+                    },
+                    success: function(json) {
+                        console.log(json);
+                        var happy_array = [];
+                        var sad_array = [];
+                        $.each(json.result, function (i, item) {
+                            var coordinates = new google.maps.LatLng(parseInt(item.lat), parseInt(item.lng));
+                            if (item.wgt < 0){
+                                var weightedLoc = {location: coordinates, weight: item.wgt*-1};
+                                sad_array.push(weightedLoc);
+                            }else if(item.wgt>0){
+                                var weightedLoc = {location: coordinates, weight: item.wgt};
+                                happy_array.push(weightedLoc);
+                            }
+                        }); 
+                                                
+
+                        var happy_heatmap = new google.maps.visualization.HeatmapLayer({
+                            data: happy_array,
+                            map: map,
+                            radius: 80,
+                            gradient: happy_gradient
+                        });
+                        var sad_heatmap = new google.maps.visualization.HeatmapLayer({
+                            data: sad_array,
+                            map: map,
+                            radius: 80,
+                            gradient: sad_gradient,
+                            opacity: .6
+                        });
+                        
+                    },
+                    error: function (xhr, desc, err) {
+                        console.log(xhr);
+                        console.log("Details: " + desc + "\nError: " + err);                
+                    }
+                })
+            });
+
+/*
+  happy_heatmap = new google.maps.visualization.HeatmapLayer({
+    data: getPoints2(),
+    map: map
+  });
+
+    heatmap3 = new google.maps.visualization.HeatmapLayer({
+        data: test(),
+        map: map,
+        radius: 100
+    }); */
+        }
+
+
+function toggleHeatmap() {
+  "use strict";
+    heatmap.setMap(heatmap.getMap() ? null : map);
 }
-            #floating-panel {
-                background-color: #fff;
-                border: 1px solid #999;
-                left: 25%;
-                padding: 5px;
-                position: absolute;
-                top: 10px;
-                z-index: 5;
-            }
-        </style>
-  </head>
+
+/*function changeGradient() {
+  var gradient = [
+    'rgba(0, 255, 255, 0)',
+    'rgba(0, 0, 223, 1)',
+    'rgba(0, 0, 255, 1)',
+    'rgba(0, 63, 255, 1)',
+    'rgba(0, 127, 255, 1)',
+    'rgba(0, 191, 255, 1)',
+    'rgba(0, 255, 255, 1)',
+    'rgba(0, 255, 255, 0)', //Transparent
+    'rgba(0, 0, 191, 1)',
+    'rgba(0, 0, 159, 1)',
+    'rgba(0, 0, 127, 1)',
+    'rgba(63, 0, 91, 1)',
+    'rgba(127, 0, 63, 1)',
+    'rgba(191, 0, 31, 1)',
+    'rgba(0, 0, 191, 1)',
+  ]
+  heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+}
+
+function changeRadius() {
+  heatmap.set('radius', heatmap.get('radius') ? null : 20);
+}
+
+function changeOpacity() {
+  heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
+}*/
+
+// Heatmap data: 500 Points
+        
+    </script>
     
-    <body>
-        <div id="floating-panel">
-            <button onclick="toggleHeatmap()">Toggle Heatmap</button>
-            <button onclick="changeGradient()">Change gradient</button>
-            <button onclick="changeRadius()">Change radius</button>
-            <button onclick="changeOpacity()">Change opacity</button>
-        </div>
-        <div id="map"></div>
-  
-        <script async defer
-            src="https://maps.googleapis.com/maps/api/js?libraries=visualization&callback=initMap">
-        </script>
-    </body>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=visualization&callback=initMap"></script>
+    
+</body>
+
 </html>
