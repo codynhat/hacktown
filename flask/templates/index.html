@@ -72,7 +72,7 @@
         function initMap() {
             "use strict";
             map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 4,
+                zoom: 1,
                 center: {lat: 38.8833, lng: -102.9833},
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 disableDefaultUI: true,
@@ -82,7 +82,7 @@
                 mapTypeControl: false,
                 scaleControl: false,
                 draggable: false,
-                disableDoubleClickZoom: true
+                disableDoubleClickZoom: false
             });
             
             $("button#submit").click(function() {
@@ -99,7 +99,7 @@
                         console.log(json);
                         var array = [];
                         $.each(json.result, function (i, item) {
-                            var coordinates = new google.maps.LatLng(parseInt(json.result.lat), parseInt(json.result.lng));
+                            var coordinates = new google.maps.LatLng(parseInt(item.lat), parseInt(item.lng));
                             array.push(coordinates);
                         }); 
                                                 
@@ -107,7 +107,7 @@
                         var heatmap1 = new google.maps.visualization.HeatmapLayer({
                             data: array,
                             map: map,
-                            radius: 100
+                            radius: 20
                         });
                     },
                     error: function (xhr, desc, err) {

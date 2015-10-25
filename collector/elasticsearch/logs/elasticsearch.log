@@ -9951,3 +9951,15 @@ Caused by: java.io.FileNotFoundException: /Users/Cody/Documents/Projects/hacktow
 [2015-10-24 18:57:02,329][WARN ][cluster.routing.allocation.decider] [Her] high disk watermark [90%] exceeded on [YElWIVZlRKSEXgDL6Jv7EQ][Her] free: 5.2gb[5.6%], shards will be relocated away from this node
 [2015-10-24 18:57:02,329][INFO ][cluster.routing.allocation.decider] [Her] high disk watermark exceeded on one or more nodes, rerouting shards
 [2015-10-24 18:57:32,332][WARN ][cluster.routing.allocation.decider] [Her] high disk watermark [90%] exceeded on [YElWIVZlRKSEXgDL6Jv7EQ][Her] free: 5.2gb[5.6%], shards will be relocated away from this node
+[2015-10-24 19:10:30,545][INFO ][node                     ] [Rattler] version[1.7.3], pid[9815], build[05d4530/2015-10-15T09:14:17Z]
+[2015-10-24 19:10:30,546][INFO ][node                     ] [Rattler] initializing ...
+[2015-10-24 19:10:30,637][INFO ][plugins                  ] [Rattler] loaded [], sites []
+[2015-10-24 19:10:30,683][INFO ][env                      ] [Rattler] using [1] data paths, mounts [[/ (/dev/disk1)]], net usable_space [45.8gb], net total_space [111.8gb], types [hfs]
+[2015-10-24 19:10:33,391][INFO ][node                     ] [Rattler] initialized
+[2015-10-24 19:10:33,391][INFO ][node                     ] [Rattler] starting ...
+[2015-10-24 19:10:33,516][INFO ][transport                ] [Rattler] bound_address {inet[/0:0:0:0:0:0:0:0:9300]}, publish_address {inet[/10.111.245.155:9300]}
+[2015-10-24 19:10:33,547][INFO ][discovery                ] [Rattler] elasticsearch/ZfMGtz75QT-1zJx1adVr8Q
+[2015-10-24 19:10:37,337][INFO ][cluster.service          ] [Rattler] new_master [Rattler][ZfMGtz75QT-1zJx1adVr8Q][128-223-223-245-wireless.uoregon.edu][inet[/10.111.245.155:9300]], reason: zen-disco-join (elected_as_master)
+[2015-10-24 19:10:37,361][INFO ][http                     ] [Rattler] bound_address {inet[/0:0:0:0:0:0:0:0:9200]}, publish_address {inet[/10.111.245.155:9200]}
+[2015-10-24 19:10:37,362][INFO ][node                     ] [Rattler] started
+[2015-10-24 19:10:37,390][INFO ][gateway                  ] [Rattler] recovered [1] indices into cluster_state
