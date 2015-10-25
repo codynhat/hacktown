@@ -52,18 +52,15 @@
     <div class="container-fluid">
         <div class="row">
             <div class="jumbotron">
-                <h1>What's the Hack is Going On in the United States</h1>
+                <h1>What the Hack is Going On in the United States</h1>
                 <p>APIs, APIs, and more APIs</p>
                 <form class="form-inline">
-                    <input class="form-control" type="text" name="query" placeholder="Type in what you want to search!">
                     <select class="form-control" id='ideas'>
                         <option>Star Wars</option>
                         <option>Obama</option>
                         <option>Trump</option>
                         <option>Adele</option>
                     </select>
-                    <button id="submit" type="button" class="btn btn-default">Submit</button>
-
                     <div class='btn-group'>
                         <button id="happy" type="button" class="btn btn-default">Happiness</button>
                         <button id="sadness" type="button" class="btn btn-default">Sadness</button>
@@ -98,18 +95,16 @@
 </div>
 <footer>
     <div class="container">
-    Holla
+
+    <h4 class="text-center">Holla</h4>
+
 </div>
 </footer>
 
         <script type="text/javascript">
             /*global google*/
             var map, sad_heatmap, happy_heatmap;
-            $SCRIPT_ROOT = {
-                {
-                    request.script_root | tojson | safe
-                }
-            };
+            $SCRIPT_ROOT = {{request.script_root | tojson | safe}};
 
             function initMap() {
                 "use strict";
@@ -150,7 +145,7 @@
                     'rgba(255, 0, 0, 1)'
                 ]
 
-                $("button#submit").click(function() {
+                $("select#ideas").change(function() {
 
                     var $value = $('#ideas option:selected').text();
                     $("#tweeter a").attr("href", "https://twitter.com/search?q=" + $value);
