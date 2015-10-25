@@ -60,7 +60,7 @@ def main():
         # print score
         goodlocs+=1
         es.index(index="index", doc_type=term, body={
-                 "lat": lat, "lng": lng, "score": score}, id=tweet[5])
+                 "lat": lat, "lng": lng, "score": score,"name":tweet[6],"text":tweet[0]}, id=tweet[5])
 
     c = 0
     while(c < len(locations)):
@@ -77,7 +77,7 @@ def main():
             score = tweet[1]
             print tweet[0]
             es.index(index="index", doc_type=term, body={
-                   "lat": lat, "lng": lng, "score": score}, id=tweet[0])
+                   "lat": lat, "lng": lng, "score": score, "name":valueswecareabout[c+a][6],"text":valueswecareabout[c+a][0]}, id=tweet[0])
         c += 100
 
     print len(valueswecareabout), goodlocs, sentcount, possentiment, negsentiment
@@ -97,7 +97,7 @@ def logTweets(query, valueswecareabout):
         return -1
     for status in query:
         valueswecareabout.append(
-            (status.text, status.user.location, status.coordinates, status.geo, status.place, status.id))
+            (status.text, status.user.location, status.coordinates, status.geo, status.place, status.id, status.user.name))
     return query[-1].id
 
 
