@@ -18,15 +18,14 @@ def main():
         if len(sys.argv)==3:
             numberofqueries = int(sys.argv[2])
         
-    geo  = ("38.5000","-98.0000","3000km")
     valueswecareabout = []
-    query = getTweets(api, term, geo,0)
+    query = getTweets(api, term,0)
     lastid=logTweets(query, valueswecareabout)
 
     for i in range(numberofqueries-1):
         if lastid == -1:
             break
-        query = getTweets(api, term, geo, lastid-1)
+        query = getTweets(api, term, lastid-1)
         lastid = logTweets(query, valueswecareabout)
             
     i = 0
@@ -58,11 +57,11 @@ def main():
         i += 1
     print sentcount, possentiment, negsentiment
 
-def getTweets(api, searchterm, geo, last_id):
+def getTweets(api, searchterm, last_id):
     if last_id:
-        query = api.GetSearch(term = searchterm, count = 100, geocode = geo, max_id = last_id)
+        query = api.GetSearch(term = searchterm, count = 100, max_id = last_id)
     else:
-        query = api.GetSearch(term = searchterm, count = 100, geocode = geo)
+        query = api.GetSearch(term = searchterm, count = 100)
     return query
     
 def logTweets(query, valueswecareabout):
@@ -77,7 +76,6 @@ def getSentiment(tweet):
     return value.sentiment.polarity
         
 def getLatLng(location):
-    print location
     if len(location) == 0:
         return None
     payload = {'location': location}
