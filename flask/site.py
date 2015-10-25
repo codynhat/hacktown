@@ -8,11 +8,7 @@ import flask
 from flask import render_template
 from flask import request
 from flask import url_for
-<<<<<<< HEAD
-from flask import jsonify
-=======
 from flask import jsonify  # For AJAX transactions
->>>>>>> 587b0722524bea4dd74ef982498e3a34bd8b6f31
 
 import json
 import logging
