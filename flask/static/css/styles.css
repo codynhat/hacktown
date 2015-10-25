@@ -6,9 +6,9 @@ body {
 }
 
 #map {
-    height: 100vh;
+    height:600px;
     width: 100%;
-    position: relative;
+    position: absolute;
 }
 
 #floating-panel {
