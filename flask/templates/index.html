@@ -172,8 +172,15 @@
                         happy_heatmap = new google.maps.visualization.HeatmapLayer({
                             data: happy_array,
                             map: map,
-                            radius: 100,
+                            radius: 70,
                             gradient: happy_gradient,
+                            opacity: .8
+                        });
+                        sad_heatmap = new google.maps.visualization.HeatmapLayer({
+                            data: sad_array,
+                            map: map,
+                            radius: 70,
+                            gradient: sad_gradient,
                             opacity: .5
                         });
 
