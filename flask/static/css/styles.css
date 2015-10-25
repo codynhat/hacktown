@@ -11,6 +11,15 @@ footer {
     background: url(http://www.pixeden.com/media/k2/galleries/112/003-subtle-light-pattern-background-texture.jpg);
     margin: 40px 0px;
 }
+#bad{
+    text-align: center;
+}
+h3{
+    text-align: center;
+}
+#topFive{
+    
+}
 
 #map {
     height:600px;
