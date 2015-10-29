@@ -27,7 +27,7 @@ app.secret_key = str(uuid.uuid4())
 app.debug=CONFIG.DEBUG
 app.logger.setLevel(logging.DEBUG)
 
-es = Elasticsearch(['http://107.170.211.113:9200'])
+es = Elasticsearch(['http://localhost:9200'])
 
 ###
 # Pages

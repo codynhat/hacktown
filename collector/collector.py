@@ -8,7 +8,7 @@ import sys
 import requests
 
 #make our elasticsearch server
-es = Elasticsearch(['http://107.170.211.113:9200'])
+es = Elasticsearch(['http://localhost:9200'])
 
 
 def main():

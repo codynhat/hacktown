@@ -1,0 +1,12 @@
+[2015-10-29 10:06:46,686][INFO ][node                     ] [Sub-Mariner] version[1.7.3], pid[28630], build[05d4530/2015-10-15T09:14:17Z]
+[2015-10-29 10:06:46,688][INFO ][node                     ] [Sub-Mariner] initializing ...
+[2015-10-29 10:06:46,773][INFO ][plugins                  ] [Sub-Mariner] loaded [], sites []
+[2015-10-29 10:06:46,828][INFO ][env                      ] [Sub-Mariner] using [1] data paths, mounts [[/ (/dev/disk1)]], net usable_space [23.2gb], net total_space [111.8gb], types [hfs]
+[2015-10-29 10:06:49,150][INFO ][node                     ] [Sub-Mariner] initialized
+[2015-10-29 10:06:49,150][INFO ][node                     ] [Sub-Mariner] starting ...
+[2015-10-29 10:06:49,303][INFO ][transport                ] [Sub-Mariner] bound_address {inet[/0:0:0:0:0:0:0:0:9300]}, publish_address {inet[/192.168.1.9:9300]}
+[2015-10-29 10:06:49,339][INFO ][discovery                ] [Sub-Mariner] elasticsearch/p48VAXUMS5aP8_JznDv5Zw
+[2015-10-29 10:06:53,124][INFO ][cluster.service          ] [Sub-Mariner] new_master [Sub-Mariner][p48VAXUMS5aP8_JznDv5Zw][Codys-MacBookAir.local][inet[/192.168.1.9:9300]], reason: zen-disco-join (elected_as_master)
+[2015-10-29 10:06:53,147][INFO ][http                     ] [Sub-Mariner] bound_address {inet[/0:0:0:0:0:0:0:0:9200]}, publish_address {inet[/192.168.1.9:9200]}
+[2015-10-29 10:06:53,147][INFO ][node                     ] [Sub-Mariner] started
+[2015-10-29 10:06:53,182][INFO ][gateway                  ] [Sub-Mariner] recovered [1] indices into cluster_state

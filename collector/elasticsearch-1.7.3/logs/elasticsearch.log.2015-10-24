@@ -1,0 +1,31 @@
+[2015-10-24 23:25:45,561][INFO ][node                     ] [Valkyrie] version[1.7.3], pid[9445], build[05d4530/2015-10-15T09:14:17Z]
+[2015-10-24 23:25:45,562][INFO ][node                     ] [Valkyrie] initializing ...
+[2015-10-24 23:25:45,845][INFO ][plugins                  ] [Valkyrie] loaded [], sites []
+[2015-10-24 23:25:45,942][INFO ][env                      ] [Valkyrie] using [1] data paths, mounts [[/ (/dev/vda1)]], net usable_space [34.8gb], net total_space [39.2gb], types [ext4]
+[2015-10-24 23:25:50,734][INFO ][node                     ] [Valkyrie] initialized
+[2015-10-24 23:25:50,735][INFO ][node                     ] [Valkyrie] starting ...
+[2015-10-24 23:25:51,076][INFO ][transport                ] [Valkyrie] bound_address {inet[/0:0:0:0:0:0:0:0:9300]}, publish_address {inet[/10.12.0.7:9300]}
+[2015-10-24 23:25:51,120][INFO ][discovery                ] [Valkyrie] elasticsearch/z3JWWV_TSCeUqBvt1f1twQ
+[2015-10-24 23:25:52,673][INFO ][node                     ] [Valkyrie] stopping ...
+[2015-10-24 23:25:52,739][INFO ][node                     ] [Valkyrie] stopped
+[2015-10-24 23:25:52,740][INFO ][node                     ] [Valkyrie] closing ...
+[2015-10-24 23:25:52,752][INFO ][node                     ] [Valkyrie] closed
+[2015-10-24 23:26:03,294][INFO ][node                     ] [Living Pharaoh] version[1.7.3], pid[9489], build[05d4530/2015-10-15T09:14:17Z]
+[2015-10-24 23:26:03,294][INFO ][node                     ] [Living Pharaoh] initializing ...
+[2015-10-24 23:26:03,463][INFO ][plugins                  ] [Living Pharaoh] loaded [], sites []
+[2015-10-24 23:26:03,542][INFO ][env                      ] [Living Pharaoh] using [1] data paths, mounts [[/ (/dev/vda1)]], net usable_space [34.8gb], net total_space [39.2gb], types [ext4]
+[2015-10-24 23:26:09,986][INFO ][node                     ] [Nebula] version[1.7.3], pid[9513], build[05d4530/2015-10-15T09:14:17Z]
+[2015-10-24 23:26:09,987][INFO ][node                     ] [Nebula] initializing ...
+[2015-10-24 23:26:10,119][INFO ][plugins                  ] [Nebula] loaded [], sites []
+[2015-10-24 23:26:10,177][INFO ][env                      ] [Nebula] using [1] data paths, mounts [[/ (/dev/vda1)]], net usable_space [34.8gb], net total_space [39.2gb], types [ext4]
+[2015-10-24 23:26:13,185][INFO ][node                     ] [Nebula] initialized
+[2015-10-24 23:26:13,185][INFO ][node                     ] [Nebula] starting ...
+[2015-10-24 23:26:13,328][INFO ][transport                ] [Nebula] bound_address {inet[/0:0:0:0:0:0:0:0:9300]}, publish_address {inet[/10.12.0.7:9300]}
+[2015-10-24 23:26:13,360][INFO ][discovery                ] [Nebula] elasticsearch/qjzpD9bTR4CAkytgvjz1LQ
+[2015-10-24 23:26:17,144][INFO ][cluster.service          ] [Nebula] new_master [Nebula][qjzpD9bTR4CAkytgvjz1LQ][HackTown][inet[/10.12.0.7:9300]], reason: zen-disco-join (elected_as_master)
+[2015-10-24 23:26:17,167][INFO ][http                     ] [Nebula] bound_address {inet[/0:0:0:0:0:0:0:0:9200]}, publish_address {inet[/10.12.0.7:9200]}
+[2015-10-24 23:26:17,167][INFO ][node                     ] [Nebula] started
+[2015-10-24 23:26:22,046][INFO ][gateway                  ] [Nebula] recovered [0] indices into cluster_state
+[2015-10-24 23:31:18,258][INFO ][cluster.metadata         ] [Nebula] [index] creating index, cause [api], templates [], shards [5]/[1], mappings []
+[2015-10-24 23:31:45,897][INFO ][cluster.metadata         ] [Nebula] [index] update_mapping [adele] (dynamic)
+[2015-10-24 23:55:17,637][INFO ][cluster.metadata         ] [Nebula] [index] update_mapping [marijuana] (dynamic)
