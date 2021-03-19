@@ -1,7 +1,7 @@
 arrow==0.6.0
 Flask==0.10.1
 itsdangerous==0.24
-Jinja2==2.8
+Jinja2==2.11.3
 MarkupSafe==0.23
 python-dateutil==2.4.2
 six==1.9.0
